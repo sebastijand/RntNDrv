@@ -19,8 +19,7 @@ Vue.use(VueRouter)
     path: '/signup',
     name: 'Signup',
     component: () => import('../views/Signup.vue')
-  }
-  /**
+  },
   {
     path: '/izbornik',
     name: 'Izbornik',
@@ -52,36 +51,35 @@ Vue.use(VueRouter)
     component: () => import('../views/Model vozila.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    path: '/informacijevozilo',
+    name: 'Informacije vozila',
+    component: () => import('../views/Informacije vozila.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    path: '/odabirtermina',
+    name: 'Odabir termina',
+    component: () => import('../views/Odabir termina.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    path: '/plaćanje',
+    name: 'Plaćanje',
+    component: () => import('../views/Plaćanje.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    path: '/plaćanjekred',
+    name: 'Plaćanje Kreditna',
+    component: () => import('../views/Plaćanje Kreditna.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    path: '/plaćanjegot',
+    name: 'Plaćanje gotovina',
+    component: () => import('../views/Plaćanje gotovina.vue')
   },
   {
-    path: '/status',
+    path: '/finalnapotvrda',
     name: 'Status iznajljivanja',
     component: () => import('../views/Status iznajljivanja.vue')
   }
-  */
 ]
 
 const router = new VueRouter({
