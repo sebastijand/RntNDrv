@@ -1,5 +1,4 @@
-  
-<template>
+  <template>
   <div class="login" style="padding: 20px">
     <h1>Login</h1>
     <div class="container">
@@ -16,6 +15,9 @@
                 <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
+              <router-link to="/signup">
+                <p>Nemate račun? Resistrirajte se!</p>
+              </router-link>
             </form>
           </div>
           <div class="col-sm"></div>
@@ -25,7 +27,7 @@
 </template>
 
 
-<!--
+
 <script>
 export default {
   data () {
@@ -43,4 +45,3 @@ export default {
   }
 }
 </script>
--->

@@ -77,8 +77,8 @@ Vue.use(VueRouter)
   },
   {
     path: '/finalnapotvrda',
-    name: 'Status iznajljivanja',
-    component: () => import('../views/Status iznajljivanja.vue')
+    name: 'Finalna potvrda',
+    component: () => import('../views/Finalna potvrda.vue')
   }
 ]
 
