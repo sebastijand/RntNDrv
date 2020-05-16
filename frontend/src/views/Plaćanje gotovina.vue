@@ -3,27 +3,21 @@
     <h1 style="padding: 20px; color: #2c3e50">Plaćanje gotovinom:</h1>
     <form class="form-group col-md-4" style="display: inline-block;">
         <div class="form-group">
-            <label for="exampleInputEmail1">Ime:</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputName">Ime:</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Ime">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Prezime:</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleInputSurname">Prezime:</label>
+            <input type="text" class="form-control" id="exampleInputSurname" placeholder="Prezime">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Adresa:</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleInputAdress">Adresa:</label>
+            <input type="text" class="form-control" id="exampleInputAdress" placeholder="Adresa">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Grad:</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleInputCity">Grad:</label>
+            <input type="text" class="form-control" id="exampleInputCity" placeholder="Grad">
         </div>
-        <!--
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        -->
         <p><strong>Plaćanje se odvija u poslovnici</strong></p>
         <div>
             <router-link to="/plaćanje" style="margin-right: 15px"> 
@@ -34,13 +28,8 @@
             </router-link>
         </div>
     </form>
-    <!-- 
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> 
-    -->
   </div>
 </template>
 
 <script>
-
 </script>

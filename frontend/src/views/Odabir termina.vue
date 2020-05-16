@@ -12,8 +12,8 @@
         <!--                    PROMJENIT OVAJ DIV                  -->
 
         <div class="form-group">
-            <label for="exampleInputPassword1">Lokacija prihvaćanja vozila:</label>
-            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleText">Lokacija prihvaćanja vozila:</label>
+            <input type="text" class="form-control" id="exampleText" placeholder="Lokacija">
         </div>
 
         <!--                                                        -->
@@ -22,14 +22,8 @@
             <label for="exampleInputPassword1">Završetak korištenja:</label>
             <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <!--
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        -->
-        <router-link to="/plaćanje" sytle="float: left"> <!-- TEST PLAĆANJE -->
-            <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
+        <router-link to="/plaćanje" sytle="float: left"> 
+            <button type="submit" class="btn btn-primary">Prihvati</button>  
         </router-link>
         <br>
         <br>
@@ -37,10 +31,6 @@
             <p>Prije odabira termina, potrebno je odabrati vozilo</p>
         </router-link>
     </form>
-    <!-- 
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> 
-    -->
   </div>
 </template>
 

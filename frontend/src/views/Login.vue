@@ -1,4 +1,5 @@
-  <template>
+<!--
+<template>
   <div class="login" style="padding: 20px">
     <h1>Login</h1>
     <div class="container">
@@ -45,3 +46,4 @@ export default {
   }
 }
 </script>
+-->

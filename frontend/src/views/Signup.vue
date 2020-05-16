@@ -1,9 +1,9 @@
+<!--
 <template>
   <div class="signup" style="padding: 20px">
     <h1>Signup</h1>
     <div class="container">
       <div class="row mt-5">
-        <!-- <div class="col-sm"></div> -->
         <div class="col-sm">
           <form @submit.prevent="signup">
             <div class="form-group">
@@ -54,24 +54,7 @@
             <div class="form-group">
               <label for="confirmPasswordField">Confirm Password</label>
               <input v-model="passwordConfirmation" type="password" class="form-control" id="confirmPasswordField" placeholder="Confirm password">
-              <!-- <small id="passwordHelp" class="form-text text-muted"></small> -->
             </div>
-            <!--
-
-            OVO VJEROJATNO OBRISAT
-
-            <div class="form-group">
-              <label for="writeBio">Write something about yourself!</label>
-              <input v-model="writeSomething" type="text" class="form-control" id="writeBio" placeholder="Write something about yourself!">
-            </div> 
-
-            <div class="form-group">
-              <label for="newLocation">Location</label>
-              <select v-model="choosenLocation" id="newLocation" class="form-control form-control-lg">
-                <option v-bind:key="k" v-for="k in newLocation">{{k}}</option>
-              </select>
-            </div>
-            -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -144,3 +127,4 @@ export default {
   }
 }
 </script>
+-->
