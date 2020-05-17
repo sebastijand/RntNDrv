@@ -6,7 +6,7 @@
       <img src="škoda logo.png" style="width: 250px; height: 250px;">
       <h1>{{ carName }} {{ carModel }}</h1>
       <router-link to="/profilkorisnika" style="float: left; margin-right: 15px">
-        <button type="file" class="btn btn-primary mt-5">Natrag</button>
+        <button type="file" class="btn btn-primary mt-5">Natrag na profil</button>
       </router-link>
     </div>
     
