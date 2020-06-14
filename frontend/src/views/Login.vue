@@ -1,4 +1,3 @@
-<!--
 <template>
   <div class="login" style="padding: 20px">
     <h1>Login</h1>
@@ -17,7 +16,7 @@
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
               <router-link to="/signup">
-                <p>Nemate račun? Resistrirajte se!</p>
+                <p>Nemate račun? Registrirajte se!</p>
               </router-link>
             </form>
           </div>
@@ -28,22 +27,25 @@
 </template>
 
 
-
 <script>
+import { Auth } from '@/services';
+
 export default {
-  data () {
+  data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
-    login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-        console.log(error)
-      });
-    }
-  }
-}
+    async login() { // dodaje se async na login
+      let success = await Auth.login(this.email, this.password);
+      console.log('Rezultat prijave ', success);
+
+      if (success == true){ // ako se prijava dogodila, redirekcija na stranicu
+        this.$router.push({ name: 'Izbornik' });  //-> VJEROJATNO PROMJENIT U 'home'
+      }  
+    },
+  },
+};
 </script>
--->

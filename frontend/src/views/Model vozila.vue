@@ -5,11 +5,9 @@
     <div style="float: left; margin: 20px; width: 300px">
       <img class="mercedeslogo" src="mercedes logo 2.png" style="width: 200px; height: 200px;"> <!-- <img class="mercedeslogo" src="mercedes logo.jpg" style="width: 200px; height: 200px;"> -->
       <h1>Mercedes Benz E-klasa</h1>
-      <!-- 
       <router-link to="/informacijevozilo" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Odaberi</button>
       </router-link> 
-      -->
     </div>
 
     <div style="float: left; margin: 20px; width: 300px">
@@ -23,11 +21,9 @@
     <div style="float: left; margin: 20px; width: 300px">
       <img src="audi logo.png" style="width: 300px; height: 200px">
       <h1>Audi A4</h1> 
-      <!--
       <router-link to="/informacijevozilo" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Odaberi</button>
       </router-link>
-      -->
     </div>
 
     <div style="float: left; margin: 20px; width: 300px"> 

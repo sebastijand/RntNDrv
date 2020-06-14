@@ -1,11 +1,11 @@
 <template>
   <div class="odabirtermina">
     <h1 style="padding: 20px; color: #2c3e50">Odabir termina:</h1>
-    <form class="form-group col-md-3" style="display: inline-block;">
+    <form @submit.prevent="accetpDuration" class="form-group col-md-3" style="display: inline-block;">
         <div class="form-group">
             <div class="form-group">
-                <label for="exampleInputEmail1">Početak korištenja:</label>
-                <input size="50" type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <label for="exampleInputStart">Početak korištenja:</label>
+                <input v-model="rentStart" size="50" type="date" class="form-control" id="exampleInputStart" aria-describedby="emailHelp">
             </div>
         </div>
 
@@ -13,18 +13,18 @@
 
         <div class="form-group">
             <label for="exampleText">Lokacija prihvaćanja vozila:</label>
-            <input type="text" class="form-control" id="exampleText" placeholder="Lokacija">
+            <input v-model="location" type="text" class="form-control" id="exampleText" placeholder="Lokacija">
         </div>
 
         <!--                                                        -->
 
         <div class="form-group">
             <label for="exampleInputPassword1">Završetak korištenja:</label>
-            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input v-model="rentEnd" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <router-link to="/plaćanje" sytle="float: left"> 
+        <!-- <router-link to="/plaćanje" sytle="float: left">  -->
             <button type="submit" class="btn btn-primary">Prihvati</button>  
-        </router-link>
+        <!-- </router-link> -->
         <br>
         <br>
         <router-link to="/klasa">
@@ -34,4 +34,27 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { Trajanje_Najama } from '@/services';
+
+export default {
+    data() {
+        return {
+            rentStart: '', 
+            location: '',
+            rentEnd: '', 
+        };
+    },
+    methods: {
+        async accetpDuration() { 
+            let success2 = await Trajanje_Najama.accetpDuration(this.rentStart, this.location, this.rentEnd);
+            console.log('Rezultat prijave perioda ', success2);
+
+            if (success2 == true){ // ako se prijava dogodila, redirekcija na stranicu
+                this.$router.push({ name: 'Plaćanje' });  //-> VJEROJATNO PROMJENIT U 'home'
+            }
+        },  
+    },
+}
+ 
+</script>

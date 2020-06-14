@@ -5,11 +5,9 @@
     <div class="izbornik1" style="float: left; padding: 20px; width: 300px">
       <img src="vw up transparent.png" style="width: 250px">
       <h1>Mini</h1> 
-      <!--
-      <router-link to="/model" sytle="float: left">
+      <router-link to="/mini" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5" style="width: 100px">Odaberi</button>
       </router-link> 
-      -->
     </div>
     
     <div class="izbornik1" style="float: left; padding: 20px; width: 300px">
@@ -23,11 +21,9 @@
     <div class="izbornik1" style="float: left; padding: 20px; width: 300px">
       <img src="opel-vivaro-png.png" style="width: 250px">
       <h1>Kombi</h1> 
-      <!--
-      <router-link to="/model" sytle="float: left">
+      <router-link to="/kombi" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5" style="width: 100px">Odaberi</button>
       </router-link> 
-      -->
     </div>
     
     <div class="izbornik1" style="float: left; margin: 10px; width: 200px"> <!-- <div class="klasa1" style="float: left; margin: 10px"> -->    

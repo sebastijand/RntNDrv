@@ -1,24 +1,30 @@
-<!--
+
 <template>
   <div class="signup" style="padding: 20px">
     <h1>Signup</h1>
     <div class="container">
       <div class="row mt-5">
+        <div class="col-sm"></div>
         <div class="col-sm">
           <form @submit.prevent="signup">
             <div class="form-group">
               <label for="emailField">Email address</label>
               <input v-model="email" type="email" class="form-control" id="emailField" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
-
+            
+            <div class="form-group">
+              <label for="passwordField">Password</label>
+              <input v-model="password" type="password" class="form-control" id="passwordField" placeholder="At least 6 digets.">
+            </div>
+            
             <div class="form-group">
               <label for="usernameField">Name</label>
-              <input v-model="username" type="text" class="form-control" id="usernameField" aria-describedby="usernameHelp" placeholder="Enter name">
+              <input v-model="name" type="text" class="form-control" id="usernameField" aria-describedby="usernameHelp" placeholder="Enter name">
             </div>
 
             <div class="form-group">
               <label for="usersurnameField">Surname</label>
-              <input v-model="usersurname" type="text" class="form-control" id="usersurnameField" aria-describedby="usersurnameHelp" placeholder="Enter surname">
+              <input v-model="surname" type="text" class="form-control" id="usersurnameField" aria-describedby="usersurnameHelp" placeholder="Enter surname">
             </div> 
 
             <div class="form-group">
@@ -45,16 +51,12 @@
               <label for="telephoneField">Telephone</label>
               <input v-model="telephone" type="text" class="form-control" id="telephoneField" aria-describedby="telephoneHelp" placeholder="Enter telephone">
             </div> 
-            
-            <div class="form-group">
-              <label for="passwordField">Password</label>
-              <input v-model="password" type="password" class="form-control" id="passwordField" placeholder="At least 6 digets.">
-            </div>
-
+            <!--
             <div class="form-group">
               <label for="confirmPasswordField">Confirm Password</label>
               <input v-model="passwordConfirmation" type="password" class="form-control" id="confirmPasswordField" placeholder="Confirm password">
             </div>
+            -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -67,64 +69,36 @@
 
 
 <script>
+import { Auth } from '@/services';
+
 export default {
   name: "signup",
   data () {
-    return {
+    return {      
       email: "",
-      username: "",
-      usersurname: "",
+      password: "",
+      name: "",
+      surname: "",
       adress: "",
       city: "",
       insurance: "",
       category: "",
       telephone: "",
-      password: "",
-      passwordConfirmation: "" ,
+      //passwordConfirmation: "" ,
+      
     }
   },
   methods: {
-    signup () {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {  // <- POGLEDAT DA LI OVDJE TREBA DODAVAT INFORMACIJE IZ DATA
-        let id = this.email;
-        //    TRENUTNO NE RADI JER TREBA SPOJIT PODATKE U DATABASE 
-        //    (VIDIT AKO TREBA MJENJAT U REAL DATABASE ILI PROBAT SREDIT CLOUD FIRESTORE)
-        //    TAKOĐER POGLEDAJ "index.html" (public folder)
-        //    OBRISAT KOMENTAR I SREDIT KOD NA "App.vue"
-        db.collection("users")
-            .doc(id)
-            .set({
-              displayName: this.username,
-              displaySurname: this.usersurname,
-              displayAdress: this.adress,
-              displayCity: this.city,
-              userInsurance: this.insurance,
-              userCategory: this.category,
-              displayTel: this.telephone
-
-
-              //newBio: this.writeSomething,
-              //newLocation: this.choosenLocation
-            })
-            .then(function() {
-              console.log("Document successfully written!");
-            })
-            .catch(function(error) {
-              console.error("Error writing document: ", error);
-            });
-        })
-        
-        .catch(error  => {
-          console.error(error);
-          this.errorMessage = error.message;
-        });
-    }
-    /*signup () {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-        console.log(error);
-      });
-    }*/
+    async signup() { // dodaje se async na login
+      let success = await Auth.signup(this.email, this.password, this.name, this.surname, this.adress, this.city, this.insurance, this.category, this.telephone);
+      console.log('Rezultat prijave ', success);
+    
+      if (success == true){ // ako se prijava dogodila, redirekcija na stranicu
+        this.$router.push({ name: 'Izbornik' });  //-> VJEROJATNO PROMJENIT U 'home'
+      }  
+    },
   }
 }
 </script>
--->
+
+

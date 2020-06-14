@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import { Auth } from '@/services'
 
 Vue.use(VueRouter)
 
@@ -41,14 +42,24 @@ Vue.use(VueRouter)
     component: () => import('../views/Klasa vozila.vue')
   },
   {
-    path: '/status',
-    name: 'Status iznajmljivanja',
-    component: () => import('../views/Status iznajmljivanja.vue')
-  },
-  {
     path: '/model',
     name: 'Model vozila',
     component: () => import('../views/Model vozila.vue')
+  },
+  {
+    path: '/mini',
+    name: 'Mini klasa',
+    component: () => import('../views/Mini.vue')
+  },
+  {
+    path: '/kombi',
+    name: 'Kombi klasa',
+    component: () => import('../views/Kombi.vue')
+  },
+  {
+    path: '/status',
+    name: 'Status iznajmljivanja',
+    component: () => import('../views/Status iznajmljivanja.vue')
   },
   {
     path: '/informacijevozilo',
@@ -67,8 +78,8 @@ Vue.use(VueRouter)
   },
   {
     path: '/plaćanjekred',
-    name: 'Plaćanje Kreditna',
-    component: () => import('../views/Plaćanje Kreditna.vue')
+    name: 'Plaćanje kreditna',
+    component: () => import('../views/Plaćanje kreditna.vue')
   },
   {
     path: '/plaćanjegot',
@@ -86,6 +97,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const javneStranice = ["/", "/login", "/signup", "/izbornik", "/klasa", "/model"]  // KOJE STRANICE KORISNIK MOŽE VIDJETI NEULOGIRAN
+  const loginPotreban = !javneStranice.includes(to.path)
+  const user = Auth.getUser();
+
+  if (loginPotreban && !user){
+    next('/login');
+    return;
+  }
+  next();
 })
 
 export default router

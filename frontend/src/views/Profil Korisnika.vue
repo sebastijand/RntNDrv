@@ -2,15 +2,16 @@
   <div class="profilkorisnika">
     <h4 style="float: left; margin: 50px">Informacije o korisniku:</h4>
     <div style="float: left; margin: 125px;">
-      <p><b>Ime:  {{ displayName }} </b></p>
-      <p><b>Prezime:  {{ displaySurname }} </b></p>
-      <p><b>Adresa:  {{ displayAdress }} </b></p>
-      <p><b>Grad:  {{ displayCity }} </b></p>
-      <p><b>Osiguranje:   {{ userInsurance }} </b></p>
-      <p><b>Vozačka dozvola:  {{ userCategory }} </b></p>
-      <p><b>Kontakt telefon:  {{ displayTel }} </b></p>
-      <p><b>Kontakt e-mail:  {{ userEmail }} </b></p>
-        
+      <span v-if="auth.authenticated">
+        <p><b>Ime:  {{ auth.displayName }} </b></p>
+        <p><b>Prezime:  {{ /*auth.*/displaySurname }} </b></p>
+        <p><b>Adresa:  {{ /*auth.*/displayAdress }} </b></p>
+        <p><b>Grad:  {{ /*auth.*/displayCity }} </b></p>
+        <p><b>Osiguranje:   {{ /*auth.*/userInsurance }} </b></p>
+        <p><b>Vozačka dozvola:  {{/* auth.*/userCategory }} </b></p>
+        <p><b>Kontakt telefon:  {{ /*auth.*/displayTel }} </b></p>
+        <p><b>Kontakt e-mail:  {{ auth.userEmail }} </b></p>
+      </span>
       <router-link to="/status">
         <button type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Status najma</button>
       </router-link>
@@ -25,9 +26,17 @@
 
 <script type="text/javascript">
 import store from '@/store.js'
+import { Auth } from '@/services'
+
 export default {
   data () {
-    return store;
+    //return store;
+    
+    return {
+      ...store,
+      auth: Auth.state,
+    }
+    
   },
   /*
   mounted () {     
@@ -41,7 +50,7 @@ export default {
       insurance = user.userInsurance
       category = user.userCategory
       telephone = user.displayTel
-      email = user.userEmail;
+      //email = user.userEmail;
     }
   }*/
 }

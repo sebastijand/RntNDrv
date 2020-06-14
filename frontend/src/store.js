@@ -2,9 +2,9 @@
 export default {
     //          KORISNIK             \\  
 
-    authenticated: false,
-    userEmail: 'fake@email.com',
-    displayName: 'Fake Name',
+    //authenticated: false,
+    //userEmail: 'fake@email.com',
+    //displayName: 'Fake Name',
     displaySurname: 'Fake Surname',
     displayAdress: 'Fake Adress',
     displayCity: 'Random City',

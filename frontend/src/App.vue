@@ -1,7 +1,26 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/" style="float: left">Home</router-link> 
+      <router-link to="/" style="float: left">Home</router-link>
+      <router-link v-if="!auth.authenticated" class="btn btn-info my-2 my-sm-0 mr-2" to="/login">
+        Login
+      </router-link>
+
+      <router-link v-if="auth.authenticated" to="/logout" style="float: left">
+        Logout
+      </router-link>
+
+      <!--
+      <span v-if="auth.authenticated" style="float: left">
+        <a @click="logout" href="#">Logout</a>
+      </span>
+      -->
+
+      <router-link v-if="auth.authenticated" to="/signup" style="float: left">
+        Signup
+      </router-link>
+      
+      
     </div>
     <router-view/>
   </div>
@@ -10,13 +29,20 @@
 
 <script type="text/javascript">
 import store from '@/store.js'
+import { Auth } from '@/services';
+
 export default {
   data () {
-    return store;
+    return {
+      ...store,
+      auth: Auth.state,
+    }
+    //return store;
   },
   methods: {
     logout() {
-      firebase.auth().signOut()
+      Auth.logout();
+      this.$router.go();
     }
   },
   /*
