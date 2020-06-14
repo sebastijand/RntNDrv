@@ -43,7 +43,7 @@ export default {
       console.log('Rezultat prijave ', success);
 
       if (success == true){ // ako se prijava dogodila, redirekcija na stranicu
-        this.$router.push({ name: 'Izbornik' });  //-> VJEROJATNO PROMJENIT U 'home'
+        this.$router.push({ name: 'Izbornik' });  
       }  
     },
   },

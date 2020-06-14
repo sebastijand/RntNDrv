@@ -16,10 +16,11 @@
       </span>
       -->
 
+      <!--
       <router-link v-if="auth.authenticated" to="/signup" style="float: left">
         Signup
       </router-link>
-      
+      -->
       
     </div>
     <router-view/>
@@ -37,7 +38,6 @@ export default {
       ...store,
       auth: Auth.state,
     }
-    //return store;
   },
   methods: {
     logout() {
@@ -45,45 +45,7 @@ export default {
       this.$router.go();
     }
   },
-  /*
-  mounted () {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log("User is logged in with email " + user.email)
-        this.authenticated = true
-        this.userEmail = user.email
-        db.collection("users")
-          .doc(this.userEmail)
-          .get()
-          .then(doc => {
-            if (doc.exists) {
-              console.log("Document data:", doc.data());
-              this.displayName = doc.data().displayName;
-              this.displaySurname = doc.data().displaySurname;
-              this.displayAdress = doc.data().displayAdress;
-              this.displayCity = doc.data().displayCity;
-              this.userInsurance = doc.data().userInsurance;
-              this.userCategory = doc.data().userCategory;
-              this.displayTel = doc.data().displayTel;
-              //this.newBio = doc.data().newBio;
-              //this.newLocation = doc.data().newLocation;
-            } else {
-              // doc.data() will be undefined in this case
-              console.log("No document!");
-            }
-          });
-        if (this.$route.name !== 'Home'){
-          this.$router.push({name: 'Home'}).catch(err => console.log(err))
-        }
-      }
-      else {
-        console.log("User is not logged in")
-        this.authenticated = false
-        if (this.$route.name !== 'Login')
-          this.$router.push({name: 'Login'}).catch(err => console.log(err))
-      } 
-    })
-  }*/
+  
 }
 </script>
 

@@ -65,11 +65,10 @@ export default {
 
   methods: {
     accetp () {
-      UNUTRA UPISAT KOD KOJI SPREMA PODATKE NA MONGODB BAZU!!!
+      // DOLAZI KOD KOJI SPREMA PODATKE NA MONGODB BAZU
     }
   }
 
-  OVAJ DIO PROVJERIT SUTRA!!!
   props: ['id'],
     data() {
         return {
@@ -77,7 +76,7 @@ export default {
         };
     },
     async mounted() {
-        this.card = await Posts.getOne(this.oib);
+        this.card = await .getOne(this.);
     },
     name: 'post-detail',
     components: {

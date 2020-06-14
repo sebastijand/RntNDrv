@@ -48,6 +48,7 @@ app.post('/users', async (req, res) => {
     //res.json(user);
 });
 
+// NAČINI PLAĆANJA
 app.post('/payments', async (req, res) => {
     let payment = req.body;
     let payment_id;
@@ -60,7 +61,7 @@ app.post('/payments', async (req, res) => {
     res.json({ payment_id: payment_id })
 });
 
-/* TRAJANJE NAJMA -> IT WORKS FOR NOW */
+// TRAJANJE NAJMA 
 app.post('/durations', async (req, res) => {
     let duration = req.body;
     let duration_id;
@@ -74,7 +75,7 @@ app.post('/durations', async (req, res) => {
 });
 
 
-
+/*
 
 app.get('/korisnici', async (req, res) => {
     let db = await connect()
@@ -85,21 +86,10 @@ app.get('/korisnici', async (req, res) => {
     console.log("Prikaz korisnika: ", result)
     res.json(result)
 })
+*/
 
-// TREBA SREDIT services U FRONTENDU (TAMO SE NALAZI "getOne() FUNKCIJA")
-// PROBLEM -> STAVIT 12 ZNAKOVA UMISTO 11 NA OIB
-// CILJ: JEDAN KORISNIK (index.js(backend) -> stvorit funkciju u services gdje će se izvuć jedan korisnik -> funkciju povezat na Profile.vue)
-
-//app.get('/korisnici/:oib', async (req, res) => {
-//    let oib = req.params.oib;
-//    let db = await connect();
-//    let document = await db.collection('users').findOne({ _id: mongo.ObjectId(oib) });
-//
-//    console.log("Jedan korisnik:", document)
-//    res.json(document);
-//});
-
-
+/*
+// VOZILA ĆE SE VUĆ IZ BAZE I ISPISIVAT ĆE SE NA FRONTENDU
 app.get('/vozilo', async (req, res) => {
     let db = await connect()
 
@@ -108,19 +98,19 @@ app.get('/vozilo', async (req, res) => {
 
     console.log("Prikaz vozila: ", result)
     res.json(result)
-})
+})*/
 
-
+/*
 // korisnik:
 app.get('/korisnici', (req, res) => res.json(data.korisnici)); 
 app.get('/korisnici/:oib', (req, res) => res.json(data.jedan_korisnik)); 
 
 // unos novog korisnika: (postavljeno iznad, treba riješit i testirat)
-/*app.post('/korisnici', (req, res) => {
-    res.statusCode = 201;
-    res.setHeader('Location', '/korisnici/1234');  
-    res.send();
-});*/
+//app.post('/korisnici', (req, res) => {
+//    res.statusCode = 201;
+//    res.setHeader('Location', '/korisnici/1234');  
+//    res.send();
+//});
 
 // vozilo:
 app.get('/vozilo', (req, res) => res.json(data.vozilo)); 
@@ -132,24 +122,6 @@ app.post('/vozilo', (req, res) => {
     res.setHeader('Location', '/vozilo/12312312312123123');  
     res.send();
 });
-
-/*
-// NAJVJEROJATNIJE IZBRISAT
-// povezivanje vozila i korisnika:
-app.get('/vozilo/:sasija/korisnik/:oib', (req, res) => res.json(data.najamVozila))
-app.put('/vozilo/:sasija/korisnik/:oib', (req, res) => {
-    let data = req.body;
-    if (!data.najam) { 
-        res.statusCode = 400;
-        return res.json({
-            error: 'There are parameters missing.',
-        });
-    }
-    res.statusCode = 201;
-    res.setHeader('Location', '/vozilo/KIK372JFJ204POLL6/korisnik/84887392874'); 
-    res.send();
-});
-*/
 
 // ugovori: 
 
@@ -163,6 +135,7 @@ app.post('/ugovori', (req, res) => {
     res.setHeader('Location', '/ugovori/1');
     res.send();
 });
+*/
 
 
 app.listen(port, () => console.log(`Slušam na portu ${port}!`));

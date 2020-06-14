@@ -1,16 +1,7 @@
 import mongo from 'mongodb';
 import connect from './db';
-//import bcrypt from "bcrypt";  -> VJEROJATNO POTREBNO VEZANO ZA KRED KARTICU!!!
+//import bcrypt from "bcrypt";  
 //import jwt from "jsonwebtoken";     
-
-// UNIQUE E-MAIL ADRESA/USERNAME
-//(async () => {
-//    let db = await connect();
-//    await db.collection('users').createIndex({ username: 1}, { unique: true });
-//})();
-
-
-//  STEPS: placanje.js ✓ -> index.js(backend) ✓ -> index.js(services) -> Plaćanje.vue (gotovina i kred.)
 
 
 export default {
@@ -19,7 +10,7 @@ export default {
         let db = await connect();
         let doc = {
             // KREDITNA 
-            br_kartice: userPayment.br_kartice,
+            br_kartice: userPayment.br_kartice, // await bcrypt.hash(userPayment.br_kartice, 10)
             datum_isteka: userPayment.datum_isteka,
             ime_kompanije: userPayment.ime_kompanije,
             // GOTOVINA
@@ -37,7 +28,5 @@ export default {
                 throw new Error('Ovi podaci su već uneseni')
             }
         }
-        //await db.collection('payment').insertOne(doc);
-        //console.log("tu smo", userPayment)
     },
 };

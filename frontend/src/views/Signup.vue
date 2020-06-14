@@ -89,12 +89,12 @@ export default {
     }
   },
   methods: {
-    async signup() { // dodaje se async na login
+    async signup() { 
       let success = await Auth.signup(this.email, this.password, this.name, this.surname, this.adress, this.city, this.insurance, this.category, this.telephone);
       console.log('Rezultat prijave ', success);
     
-      if (success == true){ // ako se prijava dogodila, redirekcija na stranicu
-        this.$router.push({ name: 'Izbornik' });  //-> VJEROJATNO PROMJENIT U 'home'
+      if (success == true){
+        this.$router.push({ name: 'Izbornik' });  
       }  
     },
   }

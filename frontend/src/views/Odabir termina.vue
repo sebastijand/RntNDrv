@@ -9,14 +9,10 @@
             </div>
         </div>
 
-        <!--                    PROMJENIT OVAJ DIV                  -->
-
         <div class="form-group">
             <label for="exampleText">Lokacija prihvaćanja vozila:</label>
             <input v-model="location" type="text" class="form-control" id="exampleText" placeholder="Lokacija">
         </div>
-
-        <!--                                                        -->
 
         <div class="form-group">
             <label for="exampleInputPassword1">Završetak korištenja:</label>
@@ -50,8 +46,8 @@ export default {
             let success2 = await Trajanje_Najama.accetpDuration(this.rentStart, this.location, this.rentEnd);
             console.log('Rezultat prijave perioda ', success2);
 
-            if (success2 == true){ // ako se prijava dogodila, redirekcija na stranicu
-                this.$router.push({ name: 'Plaćanje' });  //-> VJEROJATNO PROMJENIT U 'home'
+            if (success2 == true){ // ako se upis dogodio, redirekcija na stranicu
+                this.$router.push({ name: 'Plaćanje' });  
             }
         },  
     },

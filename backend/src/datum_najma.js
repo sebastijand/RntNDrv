@@ -3,16 +3,6 @@ import connect from './db';
 //import bcrypt from "bcrypt";  
 //import jwt from "jsonwebtoken";     
 
-// UNIQUE E-MAIL ADRESA/USERNAME
-//(async () => {
-//    let db = await connect();
-//    await db.collection('users').createIndex({ username: 1}, { unique: true });
-//})();
-
-
-//  STEPS: datum_najma.js ✓ -> index.js(backend) ✓ -> index.js(services) ✓ -> Odabir termina.vue ✓
-
-
 export default {
     // UNOS PODATAKA U NAŠU MONGODB BAZU
     async registerDuration(userDuration) {  
@@ -32,7 +22,5 @@ export default {
                 throw new Error('Ovi podaci su već uneseni')
             }
         }
-        //await db.collection('payment').insertOne(doc);
-        //console.log("tu smo", userPayment)
     },
 };

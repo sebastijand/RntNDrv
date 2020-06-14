@@ -38,21 +38,6 @@ export default {
     }
     
   },
-  /*
-  mounted () {     
-    var user = firebase.auth().currentUser;
-    var email, bio, location, username, picture;     
-    if (user != null) {
-      username = user.displayName;
-      usersurname = user.displaySurname;
-      adress = user.displayAdress
-      city = user.displayCity
-      insurance = user.userInsurance
-      category = user.userCategory
-      telephone = user.displayTel
-      //email = user.userEmail;
-    }
-  }*/
 }
 </script>
 
