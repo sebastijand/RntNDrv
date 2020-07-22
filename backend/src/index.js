@@ -9,6 +9,7 @@ import mongo from 'mongodb';
 import auth from './auth';
 import placanje from './placanje';
 import datum_najma from './datum_najma';
+//import vozila from './vozila';
 
 const app = express(); // instanciranje aplikacije
 const port = 3200; // port na kojem će web server slušati
@@ -77,6 +78,8 @@ app.post('/durations', async (req, res) => {
 
 /*
 
+TESTIRAT INFORMACIJE I PROFIL KORISNIKA PREKO app.get!!!!!!!!!!!!VAŽNO!!!!!!!!!!!!!!!!!!!!!!!
+
 app.get('/korisnici', async (req, res) => {
     let db = await connect()
 
@@ -88,17 +91,79 @@ app.get('/korisnici', async (req, res) => {
 })
 */
 
-/*
+
 // VOZILA ĆE SE VUĆ IZ BAZE I ISPISIVAT ĆE SE NA FRONTENDU
-app.get('/vozilo', async (req, res) => {
+// app.get('/vozilo'/*/vozilo/:sasija*/, async (req, res) => {
+app.get('/vozilo/:sasija', async (req, res) => {
     let db = await connect()
+    //let sasija = JSON.parse(req.body.sasija);
+    let sasija_vozila = req.params.sasija;
+    
+    let cursor = await db.collection('vehicles').findOne({
+        _id: mongo.ObjectId(sasija_vozila)/*}, function(error,doc) {
+            if (error) {
+              callback(error);
+            } else {
+               callback(null, doc);
+            }*/
+    })
+    //let cursor = await db.collection('vehicles').find().sort({sasija: -1})
+    //let result = await cursor.toArray()
+    console.log("Prikaz vozila: ", cursor)
+    res.json(cursor)
 
-    let cursor = await db.collection('vehicles').find().sort({sasija: -1})
+    /*
+
+    UBACIT GORNJI DIO U "vozila.js" I NE ZABORAVIT KOMENTARE
+
+    let vozilo = req.body;
+    let vozilo_id;
+    try{
+        vozilo_id = await vozila.vechicleList(vozilililili);
+    }
+    catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+    res.json({ vozilo_id : vozilo_id })
+    */
+})
+
+// TRAŽI VOZILA GDJE JE KLASA = "SEDAN"
+// IMPLEMENTIRAT PREKO SERVICES U "Model vozila.vue"
+// PROVJERIT I TESTIRAT/MJENJAT RUTU
+
+app.get('/vozilo1', async (req, res) => {
+    let db = await connect()
+    let cursor = await db.collection('vehicles').find({ klasa: 'Sedan' })
     let result = await cursor.toArray()
-
     console.log("Prikaz vozila: ", result)
     res.json(result)
-})*/
+})
+
+// TRAŽI VOZILA GDJE JE KLASA = "MINI"
+// IMPLEMENTIRAT PREKO SERVICES U "Mini.vue"
+// PROVJERIT I TESTIRAT/MJENJAT RUTU
+
+app.get('/vozilo2', async (req, res) => {
+    let db = await connect()
+    let cursor = await db.collection('vehicles').find({ klasa: 'Mini' })
+    let result = await cursor.toArray()
+    console.log("Prikaz vozila: ", result)
+    res.json(result)
+})
+
+// TRAŽI VOZILA GDJE JE KLASA = "KOMBI"
+// IMPLEMENTIRAT PREKO SERVICES U "Mini.vue"
+// PROVJERIT I TESTIRAT/MJENJAT RUTU
+
+app.get('/vozilo3', async (req, res) => {
+    let db = await connect()
+    let cursor = await db.collection('vehicles').find({ klasa: 'Kombi' })
+    let result = await cursor.toArray()
+    console.log("Prikaz vozila: ", result)
+    res.json(result)
+})
+
 
 /*
 // korisnik:

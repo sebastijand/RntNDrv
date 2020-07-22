@@ -13,7 +13,7 @@
     <div class="izbornik1" style="float: left; padding: 20px; width: 300px">
       <img src="audi transparent.png" style="width: 250px">
       <h1>Sedan</h1> 
-      <router-link to="/model" sytle="float: left">
+      <router-link to="/sedan" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5" style="width: 100px">Odaberi</button>
       </router-link> 
     </div>

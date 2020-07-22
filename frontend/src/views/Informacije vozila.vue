@@ -1,5 +1,9 @@
 <template>
-  <div class="model">
+ 
+  <div v-if="card">
+    <InfoVehiclesComponent :info="card" />
+  </div>
+<!--  <div class="model">
     <h1 style="padding: 20px; color: #2c3e50;">Informacije o vozilu</h1>
 
     <div style="float: left; margin: 10px">
@@ -21,9 +25,33 @@
       <h3>Cijena (po danu):  {{ carPrice }} </h3>
     </div>
   </div>
+-->
 </template>
 
- 
+<script>
+import InfoVehiclesComponent from '@/components/InfoVehiclesComponent.vue';
+import { Vozilo } from '@/services';
+
+export default {
+  props: ['sasija'],
+  data() {
+    return {
+      card: null
+    };
+  },
+  async mounted() {
+    console.log(this.sasija)
+    this.card = await Vozilo.choosenVehicle(this.sasija);
+  },
+  name: 'informacije-vozila',
+  components: {
+    InfoVehiclesComponent
+  }
+};
+</script>
+
+
+<!--
 <script type="text/javascript">
 import store from '@/store.js'
 export default {
@@ -32,6 +60,7 @@ export default {
   },
 }
 </script>
+-->
 
 
 <style scoped>

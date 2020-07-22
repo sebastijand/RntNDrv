@@ -42,18 +42,18 @@ Vue.use(VueRouter)
     component: () => import('../views/Klasa vozila.vue')
   },
   {
-    path: '/model',
-    name: 'Model vozila',
-    component: () => import('../views/Model vozila.vue')
+    path: '/sedan',
+    name: 'sedan-klasa',
+    component: () => import('../views/Sedan.vue')
   },
   {
     path: '/mini',
-    name: 'Mini klasa',
+    name: 'mini-klasa',
     component: () => import('../views/Mini.vue')
   },
   {
     path: '/kombi',
-    name: 'Kombi klasa',
+    name: 'kombi-klasa',
     component: () => import('../views/Kombi.vue')
   },
   {
@@ -62,8 +62,10 @@ Vue.use(VueRouter)
     component: () => import('../views/Status iznajmljivanja.vue')
   },
   {
-    path: '/informacijevozilo',
-    name: 'Informacije vozila',
+    // path: '/informacijevozilo/:id' ili '/informacijevozilo/:sasija'
+    path: '/informacijevozilo/:sasija',
+    props: true,
+    name: 'informacije-vozila',
     component: () => import('../views/Informacije vozila.vue')
   },
   {

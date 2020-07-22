@@ -1,9 +1,29 @@
 <template>
-  <div class="model">
+  <div>
+    <h1 style="padding: 20px; color: #2c3e50">Model</h1>
+    <div @click="gotoDetails(card)" v-bind:key="card.idVozMini" v-for="card in Cards">
+      <ChooseMiniComponent :choosemini="card" /> 
+    </div>
+
+    <!-- 
+      <div v-bind:key="card" v-for="card in cards">
+        <InstagramCard :info="card" />
+      </div>
+    -->
+
+    <div style="float: left; margin: 20px; width: 300px"> 
+      <img src="left arrow logo.png" alt="" style="width: 250px; height: 250px">
+      <router-link to="/klasa" sytle="float: left">
+        <button type="file" class="btn btn-primary mt-5">Natrag</button>
+      </router-link>
+    </div>
+  </div>
+  <!--
+    <div class="model">
     <h1 style="padding: 20px; color: #2c3e50">Model</h1>
 
     <div style="float: left; margin: 20px; width: 300px">
-      <img class="mercedeslogo" src="vwlogo.png" style="width: 200px; height: 200px;"> <!-- <img class="mercedeslogo" src="mercedes logo.jpg" style="width: 200px; height: 200px;"> -->
+      <img class="mercedeslogo" src="vwlogo.png" style="width: 200px; height: 200px;"> 
       <h1>VW Up</h1>
       <router-link to="/informacijevozilo" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Odaberi</button>
@@ -33,7 +53,43 @@
       </router-link>
     </div>
   </div>
+  -->
 </template>
+
+<script>
+import ChooseMiniComponent from '@/components/ChooseMiniComponent.vue';
+import { Vozilo } from '@/services';
+import store from "@/store.js";
+
+export default {
+  //props: ['sasija'],
+  data() {
+    return {
+      store,
+      Cards: []
+    };
+  },
+  /*methods: {
+    async fetchPosts(term){
+      term = term || store.vehicleName
+      this.Cards = await Vozilo.classSedan(term/*this.sasija);
+      //console.log(this.cards)
+    }
+  },*/
+  async mounted() {
+    this.Cards = await Vozilo.classMini();
+  },
+  name: 'mini-klasa',
+  methods: {
+    gotoDetails(card) {
+      this.$router.push({ path: `informacijevozilo/${card.idVozMini}` });
+    }
+  },
+  components: {
+    ChooseMiniComponent
+  }
+};
+</script>
 
 <style scoped>
   /*.mercedeslogo{

@@ -77,15 +77,81 @@ let Trajanje_Najama = {
     */
 };
 
-/*
-let Vozilo = {
 
+let Vozilo = {
+    async choosenVehicle(sasija){
+        let response = await Service.get(`/vozilo/${sasija}`)
+        let najam_vozila = response.data; 
+        return {  
+            // DESNI DIO (.sasija, .ime, itd...) SU NAZIVI IZ MONGODB BAZE  
+            idVoz: najam_vozila._id,
+            sasijaVoz: najam_vozila.sasija,
+            imeVoz: najam_vozila.ime,
+            modelVoz: najam_vozila.model,
+            klasaVoz: najam_vozila.klasa,
+            godina_proizvodnjeVoz: najam_vozila.godina_proizvodnje,
+            bojaVoz: najam_vozila.boja,
+            snagaVoz: najam_vozila.snaga,
+            vrataVoz: najam_vozila.vrata,
+            cijenaVoz: najam_vozila.cijena,
+            logoVoz: najam_vozila.logo,
+        };
+        /*
+        // mogće da je ovdje getItem umisto setItem
+        let najam_vozila = response.data;
+        localStorage.setItem('vehicles', JSON.stringify(najam_vozila)); // JSON.stringify pretvara objekt u string
+        return true;
+        */
+    },
+    
+    // AXIOS DIO VEZAN ZA KLASU SEDANA
+
+    async classSedan(){
+        let response = await Service.get(`/vozilo1`) //let response = await Service.get(`/vozilo1?ime=${vehicleName}`)
+        return response.data.map((odabir_sedan) => {
+            return {
+                idVozSedan: odabir_sedan._id,
+                imeVozSedan: odabir_sedan.ime,
+                modelSedan: odabir_sedan.model,
+                logoSedan: odabir_sedan.logo,
+            };
+        });
+    },
+    
+
+    // AXIOS DIO VEZAN ZA KLASU MINI
+
+    async classMini(){
+        let response = await Service.get(`/vozilo2`)
+        return response.data.map((odabir_mini) => {
+            return {
+                idVozMini: odabir_mini._id,
+                imeVozMini: odabir_mini.ime,
+                modelMini: odabir_mini.model,
+                logoMini: odabir_mini.logo,
+            }
+        });
+    },
+    
+    // AXIOS DIO VEZAN ZA KLASU KOMBI
+
+    async classVan(){
+        let response = await Service.get(`/vozilo3`)
+        return response.data.map((odabir_kombi) => {
+            return {
+                idVozKombi: odabir_kombi._id,
+                imeVozKombi: odabir_kombi.ime,
+                modelKombi: odabir_kombi.model,
+                logoKombi: odabir_kombi.logo,
+            }
+        });
+    },
 }
-*/
+
 
 /*
 let Ugovor = {
-
+    
 }
 */
 
@@ -184,5 +250,5 @@ let Auth = {
 };
 
 
-export { Service, Placanje, Trajanje_Najama, Auth }; 
+export { Service, Placanje, Trajanje_Najama, Auth, Vozilo /*Ugovor*/}; 
 

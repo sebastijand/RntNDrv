@@ -1,9 +1,38 @@
 <template>
+  <div>
+    <h1 style="padding: 20px; color: #2c3e50">Model</h1>
+    
+    <div @click="gotoDetails(card)" v-bind:key="card.idVozKombi" v-for="card in Cards">
+      <ChooseKombiComponent :choosekombi="card" /> 
+    </div>
+    
+    <!--<div v-bind:key="card" v-for="card in Cards">
+      <ChooseKombiComponent :choosekombi="card" /> 
+    </div>-->
+
+    <div style="float: left; margin: 20px; width: 300px"> 
+      <img src="left arrow logo.png" alt="" style="width: 250px; height: 250px">
+      <router-link to="/klasa" sytle="float: left">
+        <button type="file" class="btn btn-primary mt-5">Natrag</button>
+      </router-link>
+    </div>
+  </div>
+
+<!--
+  <div>
+    <ChooseVehicleComponent :choose="cards"/>
+</div>
+-->
+
+
+
+
+  <!--
   <div class="model">
     <h1 style="padding: 20px; color: #2c3e50">Model</h1>
 
     <div style="float: left; margin: 20px; width: 300px">
-      <img src="opellogo.png" style="width: 200px; height: 200px;"> <!-- <img class="mercedeslogo" src="mercedes logo.jpg" style="width: 200px; height: 200px;"> -->
+      <img src="opellogo.png" style="width: 200px; height: 200px;"> 
       <h1>Opel Vivaro</h1>
       <router-link to="/informacijevozilo" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Odaberi</button>
@@ -33,7 +62,44 @@
       </router-link>
     </div>
   </div>
+  -->
 </template>
+
+<script>
+import ChooseKombiComponent from '@/components/ChooseKombiComponent.vue';
+import { Vozilo } from '@/services';
+import store from "@/store.js";
+
+export default {
+  //props: ['sasija'],
+  data() {
+    return {
+      store,
+      Cards: []
+    };
+  },
+  /*methods: {
+    async fetchPosts(term){
+      term = term || store.vehicleName
+      this.Cards = await Vozilo.classSedan(term/*this.sasija);
+      //console.log(this.cards)
+    }
+  },*/
+  async mounted() {
+    this.Cards = await Vozilo.classVan();
+  },
+  name: 'kombi-klasa',
+  methods: {
+    gotoDetails(card) {
+      this.$router.push({ path: `informacijevozilo/${card.idVozKombi}` });
+    }
+  },
+  components: {
+    ChooseKombiComponent
+  }
+};
+</script>
+
 
 <style scoped>
   /*.mercedeslogo{
