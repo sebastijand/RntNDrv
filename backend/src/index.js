@@ -9,7 +9,7 @@ import mongo from 'mongodb';
 import auth from './auth';
 import placanje from './placanje';
 import datum_najma from './datum_najma';
-//import vozila from './vozila';
+import ugovor from './ugovor';
 
 const app = express(); // instanciranje aplikacije
 const port = 3200; // port na kojem će web server slušati
@@ -26,6 +26,7 @@ app.post('/auth', async (req, res) => {
     let user = req.body;
 
     try {
+        // let result = await auth.authenticateUser(user.username, user.password, user.kontakt_tel);
         let result = await auth.authenticateUser(user.username, user.password); // predaje se username i password koji su došli sa forntenda
         res.json(result);
     }
@@ -49,6 +50,23 @@ app.post('/users', async (req, res) => {
     //res.json(user);
 });
 
+//TESTIRAT INFORMACIJE I PROFIL KORISNIKA PREKO app.get!!!!!!!!!!!!VAŽNO!!!!!!!!!!!!!!!!!!!!!!!
+
+// promjenit 'korisnici' sa 'users'
+/*app.get('/users/:id', async (req, res) => {
+    let db = await connect()
+    let komarac = req.params.id;
+
+    let cursor = await db.collection('users').findOne({
+        _id: mongo.ObjectId(komarac)
+    })
+    let result = await cursor.toArray()
+
+    console.log("Prikaz korisnika: ", result)
+    res.json(result)
+})*/
+
+
 // NAČINI PLAĆANJA
 app.post('/payments', async (req, res) => {
     let payment = req.body;
@@ -62,35 +80,82 @@ app.post('/payments', async (req, res) => {
     res.json({ payment_id: payment_id })
 });
 
+app.post('/paymentcredit', async (req, res) => {
+    let cred = req.body; 
+    try {
+        // let result = await auth.authenticateUser(user.username, user.password, user.kontakt_tel);
+        let result = await placanje.confirmPayment(cred.br_kartice, cred.datum_isteka, cred.ime_kompanije);
+        res.json(result);
+    }
+    catch (e) {
+        res.status(401).json({ error: e.message }); 
+    }
+});
+
+app.post('/paymentscash', async (req, res) => {
+    let cash = req.body;
+    try {
+        // let result = await auth.authenticateUser(user.username, user.password, user.kontakt_tel);
+        let result = await placanje.confirmPayment(cash.mjesto_poslovnice);
+        res.json(result);
+    }
+    catch (e) {
+        res.status(401).json({ error: e.message }); 
+    }
+});
+
 // TRAJANJE NAJMA 
 app.post('/durations', async (req, res) => {
     let duration = req.body;
-    let duration_id;
+    let duration_id
     try{
         duration_id = await datum_najma.registerDuration(duration);
+        //res.json(duration_id)
     }
     catch (e) {
         res.status(500).json({ error: e.message });
     }
-    res.json({ duration_id : duration_id })
+    res.json({duration_id: duration_id})
 });
 
+app.post('/duration', async (req, res) => {
+    let dur = req.body;
+    try {
+        // let result = await auth.authenticateUser(user.username, user.password, user.kontakt_tel);
+        let result = await datum_najma.confirmDuration(dur.pocetak_iznajmljivanja, dur.lokacija_prihvata, dur.kraj_iznajmljivanja);
+        res.json(result);
+    }
+    catch (e) {
+        res.status(401).json({ error: e.message }); 
+    }
+});
 
 /*
+app.get('/durations/:id', async (req, res) => {
+    let duration1, duration2, duration3 = req.body;
+    let duration_xdddd;
+    try{
+        duration_xdddd = await datum_najma.getDuration(duration1, duration2, duration3);
+    }
+    catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+    //console.log("Prikaz vozila: ", duration_xdddd)
+    res.json({duration_xdddd: duration_xdddd})
+    //let db = await connect() // spajamo se na bazu
+    //let document = req.params.id;
+    //let cursor = await db.collection('rentDuration').findOne({ _id: mongo.ObjectId(document) })
+    //console.log("Prikaz jednog perioda: ", cursor)
+    //res.json(cursor)
+});*/
 
-TESTIRAT INFORMACIJE I PROFIL KORISNIKA PREKO app.get!!!!!!!!!!!!VAŽNO!!!!!!!!!!!!!!!!!!!!!!!
-
-app.get('/korisnici', async (req, res) => {
+app.get('/durations', async (req, res) => {
     let db = await connect()
-
-    let cursor = await db.collection('users').find().sort({oib: -1})
+    let cursor = await db.collection('rentDuration').find()
     let result = await cursor.toArray()
-
-    console.log("Prikaz korisnika: ", result)
+    console.log("Prikaz više perioda: ", result)
     res.json(result)
 })
-*/
-
 
 // VOZILA ĆE SE VUĆ IZ BAZE I ISPISIVAT ĆE SE NA FRONTENDU
 // app.get('/vozilo'/*/vozilo/:sasija*/, async (req, res) => {
@@ -187,20 +252,39 @@ app.post('/vozilo', (req, res) => {
     res.setHeader('Location', '/vozilo/12312312312123123');  
     res.send();
 });
+*/
 
 // ugovori: 
-
+/*
 app.get('/ugovori', (req, res) => res.json(data.ugovori));
 app.get('/ugovori/:id', (req, res) => res.json(data.jedan_ugovor));
 
 // stvaranje novog ugovora:
-
-app.post('/ugovori', (req, res) => {
-    res.statusCode = 201;
-    res.setHeader('Location', '/ugovori/1');
-    res.send();
-});
 */
+
+app.post('/ugovor', async (req, res) => {
+    let vhc = req.body;
+    let vhc_id;
+    try{
+        vhc_id = await ugovor.contractVehicle(vhc);
+    }
+    catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+    res.json({ vhc_id: vhc_id })
+    /*res.statusCode = 201;
+    res.setHeader('Location', '/ugovori/1');
+    res.send();*/
+});
+
+app.get('/ugovor', async (req, res) => {
+    let db = await connect()
+    let cursor = await db.collection('contract')
+    let result = await cursor.toArray()
+    console.log("Prikaz dodanog vozila u ugovor: ", result)
+    res.json(result)
+})
+
 
 
 app.listen(port, () => console.log(`Slušam na portu ${port}!`));

@@ -4,12 +4,12 @@
     <div style="float: left; margin: 125px;">
       <span v-if="auth.authenticated">
         <p><b>Ime:  {{ auth.displayName }} </b></p>
-        <p><b>Prezime:  {{ /*auth.*/displaySurname }} </b></p>
-        <p><b>Adresa:  {{ /*auth.*/displayAdress }} </b></p>
-        <p><b>Grad:  {{ /*auth.*/displayCity }} </b></p>
-        <p><b>Osiguranje:   {{ /*auth.*/userInsurance }} </b></p>
-        <p><b>Vozačka dozvola:  {{/* auth.*/userCategory }} </b></p>
-        <p><b>Kontakt telefon:  {{ /*auth.*/displayTel }} </b></p>
+        <p><b>Prezime:  {{ auth.displaySurname }} </b></p>
+        <p><b>Adresa:  {{ auth.displayAdress }} </b></p>
+        <p><b>Grad:  {{ auth.displayCity }} </b></p>
+        <p><b>Osiguranje:   {{ auth.userInsurance }} </b></p>
+        <p><b>Vozačka dozvola:  {{ auth.userCategory }} </b></p>
+        <p><b>Kontakt telefon:  {{ auth.displayTel }} </b></p>
         <p><b>Kontakt e-mail:  {{ auth.userEmail }} </b></p>
       </span>
       <router-link to="/status">
@@ -25,7 +25,7 @@
 
 
 <script type="text/javascript">
-import store from '@/store.js'
+//import store from '@/store.js'
 import { Auth } from '@/services'
 
 export default {
@@ -33,10 +33,9 @@ export default {
     //return store;
     
     return {
-      ...store,
+      //...store,
       auth: Auth.state,
     }
-    
   },
 }
 </script>

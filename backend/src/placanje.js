@@ -19,6 +19,7 @@ export default {
             //password: await bcrypt.hash(userPayment.password, 8),  
         };
         try {
+            // let result = await db.collection('contract').insertOne(doc);
             let result = await db.collection('payment').insertOne(doc);
             if (result && result.insertedId) {
                 return result.insertedId;
@@ -27,6 +28,29 @@ export default {
             if (e.name == 'MongoError' && e.code == 11000){
                 throw new Error('Ovi podaci su već uneseni')
             }
+        }
+    },
+    
+    async confirmPayment(br_kartice, datum_isteka, ime_kompanije, mjesto_poslovnice) {  
+        let db = await connect()
+        let user = await db.collection('payment').findOne({ datum_isteka: datum_isteka, ime_kompanije: ime_kompanije })
+        let cash = await db.collection('payment').findOne({ mjesto_poslovnice: mjesto_poslovnice })
+        // POGLEDAJ "auth.js" ZA BCRYPTIRANJE KREDITNE KARTICE!!!!
+        if (user){
+            return {
+                // TOKEN KREDITNE KARTICE
+                datum_isteka: user.datum_isteka,
+                ime_kompanije: user.lokacija_prihvata,
+            }
+        }
+        else if (cash){
+            // OVO TRENUTNO NE RADI
+            return {
+                mjesto_poslovnice: cash.mjesto_poslovnice
+            }
+        }
+        else {
+            throw new Error("Idk M8")
         }
     },
 };

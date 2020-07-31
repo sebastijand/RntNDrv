@@ -10,13 +10,10 @@ import jwt from "jsonwebtoken";
     await db.collection('users').createIndex({ username: 1}, { unique: true });
 })();
 
-
-//  STEPS: auth.js -> index.js(backend) -> index.js(services) -> Login.vue
-
-
 export default {
     // UNOS PODATAKA U NAŠU MONGODB BAZU
-    async registerUser(userData) {  //--> VAŽNO ZA PROJEKT 
+    async registerUser(userData) { 
+    //async registerUser(username, password, oib, ime, prezime, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
         let db = await connect();
         let doc = {
             username: userData.username,
@@ -35,7 +32,9 @@ export default {
         };
         try {
             let result = await db.collection('users').insertOne(doc);
+            // if (result && result.ops) {
             if (result && result.insertedId) {
+                // return result.ops
                 return result.insertedId;
             }
         } catch (e) {
@@ -48,9 +47,11 @@ export default {
     },
 
     //          VIDEO PART 2            \\  
+    // async authenticateUser(username, password, kontakt_tel) {
     async authenticateUser(username, password) {  //--> korisnik sa frontenda se prijavljue putem "username" i "password" (ovi podaci dolaze sa frontenda)
         let db = await connect() // spajamo se na bazu
-        let user = await db.collection("users").findOne({ username: username})  // provjerava se da li postoji dokument sa istim "username" u bazi
+        //  let user = await db.collection('users').findOne({ username: username, kontakt_tel: kontakt_tel})
+        let user = await db.collection('users').findOne({ username: username })  // provjerava se da li postoji dokument sa istim "username" u bazi
         
         // bcrypt uspoređuje upisanu lozinku na frontendu (password) i "posoljenu" lozinku na backendu za 8 random char (user.password)
         if (user && user.password && (await bcrypt.compare(password, user.password))) {
@@ -63,6 +64,7 @@ export default {
             return {
                 token,
                 username: user.username
+                // kontakt_tel: user.kontakt_tel
             }
         }
         else {

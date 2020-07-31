@@ -74,6 +74,11 @@ Vue.use(VueRouter)
     component: () => import('../views/Odabir termina.vue')
   },
   {
+    path: '/odabirterminaconfirm',
+    name: 'Odabir termina confirm',
+    component: () => import('../views/Odabir termina confirm.vue')
+  },
+  {
     path: '/plaćanje',
     name: 'Plaćanje',
     component: () => import('../views/Plaćanje.vue')
@@ -87,6 +92,11 @@ Vue.use(VueRouter)
     path: '/plaćanjegot',
     name: 'Plaćanje gotovina',
     component: () => import('../views/Plaćanje gotovina.vue')
+  },
+  {
+    path: '/plaćanjegotconfirm',
+    name: 'Plaćanje gotovina confirm',
+    component: () => import('../views/Plaćanje gotovina confirm')
   },
   {
     path: '/finalnapotvrda',
@@ -105,8 +115,10 @@ router.beforeEach((to, from, next) => {
   const javneStranice = ["/", "/login", "/signup", "/izbornik", "/klasa", "/model"]  // KOJE STRANICE KORISNIK MOŽE VIDJETI NEULOGIRAN
   const loginPotreban = !javneStranice.includes(to.path)
   const user = Auth.getUser();
+  //const user2 = Auth.getUser2();
 
   if (loginPotreban && !user){
+  //if (loginPotreban && !user || !user2){
     next('/login');
     return;
   }

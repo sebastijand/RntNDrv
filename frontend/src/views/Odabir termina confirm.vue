@@ -1,7 +1,8 @@
 <template>
   <div class="odabirtermina">
-    <h1 style="padding: 20px; color: #2c3e50">Odabir termina:</h1>
-    <form @submit.prevent="accetpDuration" class="form-group col-md-3" style="display: inline-block;">
+    <h1 style="padding: 20px; color: #2c3e50">Potvrda o odabiru termina:</h1>
+    <p style="padding: 20px; color: #2c3e50"><strong> Molimo vas da ponovno upišete podatke:</strong></p>
+    <form @submit.prevent="testDuration" class="form-group col-md-3" style="display: inline-block;">
         <div class="form-group">
             <div class="form-group">
                 <label for="exampleInputStart">Početak korištenja:</label>
@@ -23,12 +24,15 @@
         <!-- </router-link> -->
         <br>
         <br>
+        <!--
         <router-link to="/klasa">
             <p>Prije odabira termina, potrebno je odabrati vozilo</p>
         </router-link>
+        -->
     </form>
   </div>
 </template>
+
 
 <script>
 import { Trajanje_Najama } from '@/services';
@@ -42,12 +46,12 @@ export default {
         };
     },
     methods: {
-        async accetpDuration() { 
-            let success2 = await Trajanje_Najama.accetpDuration(this.rentStart, this.location, this.rentEnd);
+        async testDuration() { 
+            let success2 = await Trajanje_Najama.testDuration(this.rentStart, this.location, this.rentEnd);
             console.log('Rezultat prijave perioda ', success2);
 
             if (success2 == true){ // ako se upis dogodio, redirekcija na stranicu
-                this.$router.push({ name: 'Odabir termina confirm' });  
+                this.$router.push({ name: 'Plaćanje' });  
             }
         },  
     },

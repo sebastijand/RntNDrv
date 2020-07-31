@@ -5,9 +5,9 @@
     <div style="float: left; margin: 10px">
       <img :src="info.logoVoz" style="width: 200px; height: 200px;"> <!-- img src={{ logoVoz }} style="width: 250px; height: 250px"-->
       <h2> {{ info.imeVoz }} {{ info.modelVoz }}</h2> 
-      <router-link to="/odabirtermina" style="float: left; margin-right: 15px">
+      <!-- <router-link to="/odabirtermina" style="float: left; margin-right: 15px">
         <button type="file" class="btn btn-primary mt-5">Odaberi termin</button>
-      </router-link>
+      </router-link> -->
       <router-link to="/klasa" style="float: left; margin-right: 15px">
         <button type="file" class="btn btn-primary mt-5">Natrag</button>
       </router-link>

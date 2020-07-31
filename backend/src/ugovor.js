@@ -1,25 +1,33 @@
-/*import connect from './db';
+import connect from './db';
+//import bcrypt from "bcrypt";  
+//import jwt from "jsonwebtoken";     
 
-//  STEPS: ugovori.js  -> index.js(backend)  -> index.js(services) -> Finalna potvrda.vue 
 
-
-// https://www.w3schools.com/nodejs/nodejs_mongodb_join.asp
 export default {
-    if (err) throw err;
-    var dbo = db.db("mydb");
-    dbo.collection('orders').aggregate([
-    { $lookup:
-       {
-         from: 'products',
-         localField: 'product_id',
-         foreignField: '_id',
-         as: 'orderdetails'
-       }
-     }
-    ]).toArray(function(err, res) {
-    if (err) throw err;
-    console.log(JSON.stringify(res));
-    db.close();
-  });
+  // UNOS PODATAKA U NAŠU MONGODB BAZU
+  async contractVehicle(vehicle) {  
+    let db = await connect();
+    let doc = {
+      sasija: vehicle.sasija,
+      ime: vehicle.ime,
+      model: vehicle.model,
+      klasa: vehicle.klasa,
+      //godina_proizvodnje: vehicle.godina_proizvodnje,
+      //boja: vehicle.boja,
+      //snaga: vehicle.snaga,
+      //vrata: vehicle.vrata,
+      //cijena: vehicle.cijena,
+      //logo: vehicle.logo    
+    };
+    try {
+      let result = await db.collection('contract').insertOne(doc);
+      if (result && result.insertedId) {
+        return result.insertedId;
+      }
+    } catch (e) {
+      if (e.name == 'MongoError' && e.code == 11000){
+        throw new Error('Ovi podaci su već uneseni')
+      }
+    }
+  },
 };
-*/

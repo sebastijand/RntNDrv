@@ -1,7 +1,7 @@
 <template>
   <div class="plaćanjegot">
     <h1 style="padding: 20px; color: #2c3e50">Plaćanje gotovinom:</h1>
-    <form @submit.prevent="spremiBazaGot" class="form-group col-md-4" style="display: inline-block;">
+    <form @submit.prevent="confirmCash" class="form-group col-md-4" style="display: inline-block;">
 
       <div class="form-group">
         <label for="exampleInputName">Mjesto Poslovnice:</label>
@@ -57,12 +57,12 @@ export default {
     };
   },
   methods: {
-    async spremiBazaGot() { 
-      let success4 = await Placanje.spremiBazaGot(this.storePayment/*, this.date, this.companyName*/);
+    async confirmCash() { 
+      let success4 = await Placanje.confirmCash(this.storePayment/*, this.date, this.companyName*/);
       console.log('Rezultat prihvata plaćanja ', success4);
 
       if (success4 == true){ 
-        this.$router.push({ name: 'Plaćanje gotovina confirm' });  
+        this.$router.push({ name: 'Finalna potvrda' });  
       }  
     },
   },

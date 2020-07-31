@@ -1,7 +1,13 @@
 <template>
- 
-  <div v-if="card">
-    <InfoVehiclesComponent :info="card" />
+  <div>
+    <form @submit.prevent="choosenVozilo">
+      <div v-if="card">
+        <InfoVehiclesComponent :info="card" />
+        <!-- <router-link @submit.prevent="login" style="float: left; margin-right: 15px"> -->
+          <button type="submit" style="float: left; margin-right: 15px" class="btn btn-primary mt-5">Odaberi termin</button>
+        <!-- </router-link> -->
+      </div>
+    </form>
   </div>
 <!--  <div class="model">
     <h1 style="padding: 20px; color: #2c3e50;">Informacije o vozilu</h1>
@@ -31,17 +37,31 @@
 <script>
 import InfoVehiclesComponent from '@/components/InfoVehiclesComponent.vue';
 import { Vozilo } from '@/services';
+import { Ugovor } from '@/services';
 
 export default {
   props: ['sasija'],
   data() {
     return {
-      card: null
+      card: null,
+      imeVozila: '',
+      modelVozila: '',
+      klasaVozila: '',
     };
   },
   async mounted() {
     console.log(this.sasija)
     this.card = await Vozilo.choosenVehicle(this.sasija);
+  },
+  methods: {
+    async choosenVozilo() { 
+      let success = await Ugovor.choosenVozilo(this.imeVozila, this.modelVozila, this.klasaVozila);
+      console.log('Rezultat: ', success);
+      
+      if (success == true){ 
+        this.$router.push({ name: 'Odabir termina' });  
+      }  
+    },
   },
   name: 'informacije-vozila',
   components: {
