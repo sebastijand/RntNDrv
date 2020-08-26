@@ -26,8 +26,8 @@
     margin: 45px;
     padding: 40px;
     border-style: inset;
-    border-width: 3px;
-    border-color: rgb(80, 77, 39);
+    border-width: 1px;
+    border-color: rgb(179, 171, 151);
     border-radius: 5px;
     background-color: #f1f1f1;
   } 

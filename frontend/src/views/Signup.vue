@@ -94,7 +94,8 @@ export default {
       console.log('Rezultat prijave ', success);
     
       if (success == true){
-        this.$router.push({ name: 'Izbornik' });  
+        //this.$router.push({ name: 'Izbornik' });  
+        this.$router.push({ name: 'Login' });  
       }  
     },
   }

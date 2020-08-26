@@ -24,6 +24,7 @@ Service.interceptors.response.use((response) => response, (error) => {
     }
 }) 
 
+// DIO VEZAN ZA PLAĆANJE
 let Placanje = {
     async spremiBazaKred(br_kartice, datum_isteka, ime_kompanije){    
         let response = await Service.post('/payments', { 
@@ -67,6 +68,12 @@ let Placanje = {
     getCash() {
         return JSON.parse(localStorage.getItem('paymentCash2'));
     },
+    //removeCash() {   // briše token iz local storage-a
+    //    localStorage.removeItem('paymentCash2');
+    //},
+    //removeCred() {   // briše token iz local storage-a
+    //    localStorage.removeItem('paymentCred2');
+    //},
     statePlaćanje: {
         //get paymentType() {
         //let placanje = Placanje.getCred();
@@ -89,6 +96,7 @@ let Placanje = {
     },
 }
 
+// DIO VEZAN ZA TRAJANJE NAJMA
 let Trajanje_Najama = {
     // POZOR: FUNKCIJA "accetpDuration" TREBA IMAT JEDNAKO IME I U VUE KOMPONENTI UNUTAR "methods"
     async accetpDuration(pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja){    
@@ -114,6 +122,9 @@ let Trajanje_Najama = {
     getCoolNajam() {
         return JSON.parse(localStorage.getItem('rentDuration2'));
     },
+    //removeCoolNajam() {   // briše token iz local storage-a
+    //    localStorage.removeItem('rentDuration2');
+    //},
     state2: {
         get dateFrom() {
             let user = Trajanje_Najama.getCoolNajam();
@@ -136,6 +147,7 @@ let Trajanje_Najama = {
     },
 };
 
+// DIO VEZAN ZA PRIKAZ VOZILA IZ BAZE
 let Vozilo = {
     async choosenVehicle(sasija){
         let response = await Service.get(`/vozilo/${sasija}`)
@@ -183,6 +195,18 @@ let Vozilo = {
             if (car) {
                 return car.klasa;
             }
+        },
+        get carPrice() {
+            let car = Vozilo.getVozilo();
+            if (car) {
+                return car.cijena;
+            }
+        },
+        get carLogo() {
+            let car = Vozilo.getVozilo();
+            if (car) {
+                return car.logo;
+            }
         }
     },
     
@@ -227,8 +251,45 @@ let Vozilo = {
             }
         });
     },
+
+    async classKompakt(){
+        let response = await Service.get(`/vozilo4`)
+        return response.data.map((odabir_kompakt) => {
+            return {
+                idVozKompakt: odabir_kompakt._id,
+                imeVozKompakt: odabir_kompakt.ime,
+                modelKompakt: odabir_kompakt.model,
+                logoKompakt: odabir_kompakt.logo,
+            }
+        });
+    },
+
+    async classSkuter(){
+        let response = await Service.get(`/vozilo5`)
+        return response.data.map((odabir_skuter) => {
+            return {
+                idVozSkuter: odabir_skuter._id,
+                imeVozSkuter: odabir_skuter.ime,
+                modelSkuter: odabir_skuter.model,
+                logoSkuter: odabir_skuter.logo,
+            }
+        });
+    },
+
+    async classPremium(){
+        let response = await Service.get(`/vozilo6`)
+        return response.data.map((odabir_premium) => {
+            return {
+                idVozPremium: odabir_premium._id,
+                imeVozPremium: odabir_premium.ime,
+                modelPremium: odabir_premium.model,
+                logoPremium: odabir_premium.logo,
+            }
+        });
+    },
 }
 
+// DIO VEZAN ZA UGOVOR
 let Ugovor = {
     async choosenVozilo(ime, model, klasa){ // async choosenVozilo(_id, ime, model, klasa)
         let response = await Service.post('/ugovor', { 
@@ -241,6 +302,12 @@ let Ugovor = {
         localStorage.setItem('choosenVozilofsf', JSON.stringify(najam)); // JSON.stringify pretvara objekt u string
         return true;
     },
+    removeEverything(){
+        localStorage.removeItem('izabranoVozilo');
+        localStorage.removeItem('paymentCash2');
+        localStorage.removeItem('paymentCred2');
+        localStorage.removeItem('rentDuration2');
+    }
     /*
     async accetpDuration( pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja){    
         let response = await Service.post('/durations', { 
@@ -260,35 +327,71 @@ let Ugovor = {
 // CILJ ZA SUTRA PRETVORIT DA VUČE localStorage SA "signup" DIJELA ZA PRIKAZ INFORMACIJA NA PROFILU KORISNIKA
 
 let Auth = {
-    // async login(username, password, kontakt_tel){
-    async login(username, password){    // sprema token u local storage
+    async login(username, password, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel){
+    //async login(username, password){    // sprema token u local storage
         let response = await Service.post('/auth', {
             username: username,
             password: password,
-            //kontakt_tel: kontakt_tel
+            adresa: adresa, 
+            grad: grad,
+            osiguranje: osiguranje,
+            vozacka_dozvola: vozacka_dozvola,
+            kontakt_tel: kontakt_tel
         });
         let user = response.data;  // axios preko "data" izlvači podatke sa backenda
         localStorage.setItem('user', JSON.stringify(user)); // JSON.stringify pretvara objekt u string
         return true;
     },
-    //async signup(username, password, ime, prezime, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
-    async signup(userDatabase) {
+    async signup(username, password, ime, prezime, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
+    //async signup(userDatabase) {
         let response = await Service.post('/users', {
-            username: userDatabase.username,
-            password: userDatabase.password,
+            username: /*userDatabase.*/username,
+            password: /*userDatabase.*/password,
             //oib: oib, --> DODAT GORE U ZAGRADE
-            ime: userDatabase.ime,
-            prezime: userDatabase.prezime,
-            adresa: userDatabase.adresa,
-            grad: userDatabase.grad,
-            osiguranje: userDatabase.osiguranje,
-            vozacka_dozvola: userDatabase.vozacka_dozvola,
-            kontakt_tel: userDatabase.kontakt_tel,
+            ime: /*userDatabase.*/ime,
+            prezime: /*userDatabase.*/prezime,
+            adresa: /*userDatabase.*/adresa,
+            grad: /*userDatabase.*/grad,
+            osiguranje: /*userDatabase.*/osiguranje,
+            vozacka_dozvola: /*userDatabase.*/vozacka_dozvola,
+            kontakt_tel: /*userDatabase.*/kontakt_tel,
         });
-        let user2 = response.data;  // axios preko "data" izlvači podatke sa backenda
-        localStorage.setItem('user2', JSON.stringify(user2)); // JSON.stringify pretvara objekt u string
+        let user = response.data;  // axios preko "data" izlvači podatke sa backenda
+        localStorage.setItem('user', JSON.stringify(user)); // JSON.stringify pretvara objekt u string
+        //let user2 = response.data;  // axios preko "data" izlvači podatke sa backenda
+        //localStorage.setItem('user2', JSON.stringify(user2)); // JSON.stringify pretvara objekt u string
         return true;
     },
+    
+    ///
+
+    async update(id){
+        let response = await Service.patch(`/auth/${id}`) 
+        let update_profile = response.data;
+        localStorage.setItem('user', JSON.stringify(update_profile)); // JSON.stringify pretvara objekt u string
+        return {
+            adresa: update_profile.adresa,
+            grad: update_profile.grad,
+            osiguranje: update_profile.osiguranje,
+            vozacka_dozvola: update_profile.vozacka_dozvola,
+            kontakt_tel: update_profile.kontakt_tel,
+        }
+    },
+
+    async changePassword(username, old_password, new_password){
+        let response = await Service.patch(`/users`, {
+            username: username,
+            old_password: old_password, 
+            new_password: new_password
+        }) 
+        let update_profile = response.data;
+        localStorage.setItem('user', JSON.stringify(update_profile)); // JSON.stringify pretvara objekt u string
+    },
+
+
+    ///
+
+
     logout() {   // briše token iz local storage-a
         localStorage.removeItem('user');
     },

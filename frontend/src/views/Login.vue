@@ -14,12 +14,31 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
-              <!--
+              
+              <div class="form-group">
+                <label for="adressField">Adress</label>
+                <input v-model="adress" type="text" class="form-control" id="adressField" aria-describedby="adressHelp" placeholder="Enter adress">
+              </div>  
+              <div class="form-group">
+                <label for="cityField">City</label>
+                <input v-model="city" type="text" class="form-control" id="cityField" aria-describedby="cityHelp" placeholder="Enter city">
+              </div> 
+              <div class="form-group">
+                <label for="insuranceField">Insurance</label>
+                <input v-model="insurance" type="text" class="form-control" id="insuranceField" aria-describedby="insuranceHelp" placeholder="Enter insurance">
+              </div> 
+              <div class="form-group">
+                <label for="categoryField">Category</label>
+                <input v-model="category" type="text" class="form-control" id="categoryField" aria-describedby="categoryHelp" placeholder="Enter category">
+              </div> 
+              
+              
               <div class="form-group">
                 <label for="telephoneField">Telephone</label>
                 <input v-model="telephone" type="text" class="form-control" id="telephoneField" aria-describedby="telephoneHelp" placeholder="Enter telephone">
               </div> 
-              -->
+              
+              
               <button type="submit" class="btn btn-primary">Submit</button>
               <router-link to="/signup">
                 <p>Nemate račun? Registrirajte se!</p>
@@ -41,12 +60,16 @@ export default {
     return {
       email: '',
       password: '',
+      adress: '',
+      city: '',
+      insurance: '',
+      category: '',
       telephone: ''
     };
   },
   methods: {
     async login() { // dodaje se async na login
-      let success = await Auth.login(this.email, this.password, this.telephone);
+      let success = await Auth.login(this.email, this.password, this.adress, this.city, this.insurance, this.category, this.telephone);
       console.log('Rezultat prijave ', success);
 
       if (success == true){ // ako se prijava dogodila, redirekcija na stranicu

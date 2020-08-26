@@ -2,25 +2,29 @@
   <div id="app">
     <div id="nav">
       <router-link to="/" style="float: left">Home</router-link>
-      <router-link v-if="!auth.authenticated" class="btn btn-info my-2 my-sm-0 mr-2" to="/login">
+      
+      <router-link v-if="auth.authenticated" style="float: left" to="/login">
         Login
       </router-link>
-
-      <router-link v-if="auth.authenticated" to="/logout" style="float: left">
-        Logout
-      </router-link>
-
+      
+      
       <!--
-      <span v-if="auth.authenticated" style="float: left">
+      <router-link v-if="auth.authenticated" to="/login" style="float: left">
+        Logout
+      </router-link>-->
+      
+      <!-- OVO TESTIRAT KADA SE UKLJUČI BACKEND -->
+      
+      <span v-if="!auth.authenticated" style="float: left">
         <a @click="logout" href="#">Logout</a>
       </span>
-      -->
-
+      
       <!--
-      <router-link v-if="auth.authenticated" to="/signup" style="float: left">
-        Signup
-      </router-link>
+      <span v-if="auth.authenticated" style="float: left">
+        <a @click="logout" href="#">Login</a>
+      </span>
       -->
+      
       
     </div>
     <router-view/>
@@ -42,7 +46,8 @@ export default {
   methods: {
     logout() {
       Auth.logout();
-      this.$router.go();
+      this.$router.push('login')
+      //this.$router.go();
     }
   },
   
@@ -66,9 +71,9 @@ export default {
   font-size: 15px;
 
 
-  padding: 35px;
+  padding: 25px;
   a {
-    padding: 12px;
+    padding: 5px;
     font-weight: bold;
     color: white;
     &.router-link-exact-active {

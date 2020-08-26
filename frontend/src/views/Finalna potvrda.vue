@@ -8,14 +8,14 @@
     <div class="card-body">
       <span v-if="auth.authenticated">
         <h6><b>Osobne informacije:</b></h6>
-        <p>Ime: <!-- {{ auth.displayName }} --></p>
-        <p>Prezime: <!-- {{ displaySurname }} --></p>
-        <p>Adresa: <!--{{ displayAdress }} --></p>
-        <!-- OVDJE IDE KOMENTAR -> <p><b>Grad: {{ displayCity }} </b></p> -->
-        <p>Osiguranje: <!-- {{ userInsurance }} --></p>
-        <!-- OVDJE IDE KOMENTAR ->  <p><b>Vozačka dozvola: {{ userCategory }} </b></p> --> 
-        <p>Kontakt telefon: <!-- {{ displayTel }} --></p>
         <p>Kontakt e-mail: {{ auth.userEmail }}</p>
+        <!--<p>Ime:  {{ auth.displayName }} </p>
+        <p>Prezime:  {{ auth.displaySurname }} </p>-->
+        <p>Adresa: {{ auth.displayAdress }} </p>
+        <!-- OVDJE IDE KOMENTAR -> <p><b>Grad: {{ displayCity }} </b></p> -->
+        <p>Osiguranje: {{ auth.userInsurance }} </p>
+        <p>Vozačka dozvola: {{ auth.userCategory }} </p>  
+        <p>Kontakt telefon: {{ auth.displayTel }} </p>
       </span>
       <br>
       <h6><b>Odabrani model vozila:</b></h6>
@@ -33,7 +33,7 @@
       <p>Ime kompanije (kred): {{ payment.creditCardName }} </p>
       <p>Mjesto poslovnice (gotovina): {{ payment.paymentCashStore }} </p>
       <router-link to="/izbornik">
-        <button type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Odustani</button>
+        <button @click="removeEverything" type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Odustani</button>
       </router-link>
       <router-link to="/status" style="margin-right: 15px">
         <button type="file" class="btn btn-primary mt-5">Prihvati</button> <!-- OVDJE IDE KOMENTAR ->  PROVJERIT DA LI TREBA DOĆ SUBMIT UMISTO "FILE" -->
@@ -103,8 +103,7 @@
 <script type="text/javascript">
 import store from '@/store.js'
 //import FinalnaPotvrdaComponent from '@/components/FinalnaPotvrdaComponent.vue';
-import { Auth, Trajanje_Najama, Vozilo, Placanje } from '@/services';
-//import { Trajanje_Najama } from '@/services'
+import { Auth, Trajanje_Najama, Vozilo, Placanje, Ugovor } from '@/services';
 
 export default {
   data () {
@@ -116,6 +115,11 @@ export default {
       payment: Placanje.statePlaćanje
 
       //trajanje : Trajanje_Najama.getNajam(this.id)
+    }
+  },
+  methods: {
+    removeEverything() {
+      Ugovor.removeEverything();
     }
   },
   /*components: {

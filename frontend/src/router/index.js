@@ -17,6 +17,11 @@ Vue.use(VueRouter)
     component: () => import('../views/Login.vue')
   },
   {
+    path: '/promjena',
+    name: 'promjena-lozinka',
+    component: () => import('../views/Promjena lozinke.vue')
+  },
+  {
     path: '/signup',
     name: 'Signup',
     component: () => import('../views/Signup.vue')
@@ -55,6 +60,21 @@ Vue.use(VueRouter)
     path: '/kombi',
     name: 'kombi-klasa',
     component: () => import('../views/Kombi.vue')
+  },
+  {
+    path: '/kompakt',
+    name: 'kompakt-klasa',
+    component: () => import('../views/Kompakt.vue')
+  },
+  {
+    path: '/skuter',
+    name: 'skuter-klasa',
+    component: () => import('../views/Skuter.vue')
+  },
+  {
+    path: '/premium',
+    name: 'premium-klasa',
+    component: () => import('../views/Premium.vue')
   },
   {
     path: '/status',
@@ -112,7 +132,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const javneStranice = ["/", "/login", "/signup", "/izbornik", "/klasa", "/model"]  // KOJE STRANICE KORISNIK MOŽE VIDJETI NEULOGIRAN
+  const javneStranice = ["/", "/login", "/signup", "/izbornik", "/klasa", "/sedan", "/mini", "/kombi", "/kompakt", "/skuter", "/premium"]  // KOJE STRANICE KORISNIK MOŽE VIDJETI NEULOGIRAN
   const loginPotreban = !javneStranice.includes(to.path)
   const user = Auth.getUser();
   //const user2 = Auth.getUser2();

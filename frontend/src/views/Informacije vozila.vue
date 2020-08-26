@@ -36,8 +36,7 @@
 
 <script>
 import InfoVehiclesComponent from '@/components/InfoVehiclesComponent.vue';
-import { Vozilo } from '@/services';
-import { Ugovor } from '@/services';
+import { Vozilo, Ugovor } from '@/services';
 
 export default {
   props: ['sasija'],

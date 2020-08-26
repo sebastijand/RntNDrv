@@ -2,8 +2,8 @@
   <div>
     <h1 style="padding: 20px; color: #2c3e50">Model</h1>
     
-    <div @click="gotoDetails(card)" v-bind:key="card.idVozKombi" v-for="card in Cards">
-      <ChooseKombiComponent :choosekombi="card" /> 
+    <div @click="gotoDetails(card)" v-bind:key="card.idVozPremium" v-for="card in Cards">
+      <ChoosePremiumComponent :choosepremium="card" /> 
     </div>
     
     <!--<div v-bind:key="card" v-for="card in Cards">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import ChooseKombiComponent from '@/components/ChooseKombiComponent.vue';
+import ChoosePremiumComponent from '@/components/ChoosePremiumComponent.vue';
 import { Vozilo } from '@/services';
 import store from "@/store.js";
 
@@ -40,16 +40,16 @@ export default {
     }
   },*/
   async mounted() {
-    this.Cards = await Vozilo.classVan();
+    this.Cards = await Vozilo.classPremium();
   },
-  name: 'kombi-klasa',
+  name: 'premium-klasa',
   methods: {
     gotoDetails(card) {
-      this.$router.push({ path: `informacijevozilo/${card.idVozKombi}` });
+      this.$router.push({ path: `informacijevozilo/${card.idVozPremium}` });
     }
   },
   components: {
-    ChooseKombiComponent
+    ChoosePremiumComponent
   }
 };
 </script>
