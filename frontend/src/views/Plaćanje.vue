@@ -15,7 +15,6 @@
         <button type="file" class="btn btn-primary mt-5">Kreditnom karticom</button>
       </router-link>
     </div>
-    
   </div>
 </template>
 

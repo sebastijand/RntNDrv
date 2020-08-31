@@ -32,21 +32,17 @@
 
       <p><strong>Plaćanje se odvija u poslovnici na dan početka najma</strong></p>
       <div>
-        <!--
-        <router-link to="/plaćanje" style="margin-right: 15px"> 
-          <button type="submit" class="btn btn-primary">Natrag</button> 
-        </router-link>
-        -->
-        <!-- <router-link to="/finalnapotvrda" style="margin-right: 15px"> -->
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
-        <!-- </router-link> -->
+        <router-link to="/plaćanje">
+          <button type="file" class="btn btn-primary">Natrag</button>
+        </router-link>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { Placanje } from '@/services';
+import { Placanje_Novac } from '@/services';
 
 export default {
   data() {
@@ -58,7 +54,7 @@ export default {
   },
   methods: {
     async spremiBazaGot() { 
-      let success4 = await Placanje.spremiBazaGot(this.storePayment/*, this.date, this.companyName*/);
+      let success4 = await Placanje_Novac.spremiBazaGot(this.storePayment/*, this.date, this.companyName*/);
       console.log('Rezultat prihvata plaćanja ', success4);
 
       if (success4 == true){ 

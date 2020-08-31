@@ -1,10 +1,8 @@
 <template>
   <div class="model">
-    <!-- OVAJ DIO DOLAZI U KOMENTARU -> <h1 style="padding: 20px; color: #2c3e50">Model</h1> -->
-    <div style="float: left; margin: 20px; width: 300px">
+    <div style="float: left; margin: 20px; width: 200px">
       <img :src="choosesedan.logoSedan" style="width: 200px; height: 200px;">
-      <h1> {{ choosesedan.imeVozSedan }} {{ choosesedan.modelSedan }}</h1>
-
+      <h4> {{ choosesedan.imeVozSedan }} {{ choosesedan.modelSedan }}</h4>
     </div>
   </div>
 </template>
@@ -20,12 +18,5 @@ export default {
       global: store
     }
   },
-  /*
-  methods: {
-    async refresh() {
-      let post = await Vozilo.classSedan(this.choose.ime);
-    },
-  }
-  */
 }
 </script>

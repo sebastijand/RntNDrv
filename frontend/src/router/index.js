@@ -116,7 +116,12 @@ Vue.use(VueRouter)
   {
     path: '/plaćanjegotconfirm',
     name: 'Plaćanje gotovina confirm',
-    component: () => import('../views/Plaćanje gotovina confirm')
+    component: () => import('../views/Plaćanje gotovina confirm.vue')
+  },
+  {
+    path: '/plaćanjekredconfirm',
+    name: 'Plaćanje kreditna confirm',
+    component: () => import('../views/Plaćanje kreditna confirm.vue')
   },
   {
     path: '/finalnapotvrda',

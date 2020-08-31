@@ -3,7 +3,7 @@
     <h1 style="padding: 20px; color: #2c3e50">Izbornik</h1>
     <div>
 
-      <div class="izbornik1" style="float: left; margin: 30px; width: 390px;">
+      <div class="izbornik1" style="float: left; margin: 30px; width: 390px; height: 358px">
         <img src="car icon.png" style="width: 190px; height: 190px">
         <router-link to="/klasa" style="display: inline-block;">
             <button type="file" class="btn btn-primary mt-5" style="float: left; margin-right: 15px">Prikaz vozila</button>

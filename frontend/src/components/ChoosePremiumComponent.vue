@@ -1,12 +1,8 @@
 <template>
   <div class="model">
-    <!-- <h1 style="padding: 20px; color: #2c3e50">Model</h1> -->
-    <div style="float: left; margin: 20px; width: 300px">
+    <div style="float: left; margin: 20px; width: 200px">
       <img :src="choosepremium.logoPremium" style="width: 200px; height: 200px;">
-      <h1> {{ choosepremium.imeVozPremium }} {{ choosepremium.modelPremium }}</h1>
-      <!--<router-link to="/informacijevozilo" sytle="float: left">
-        <button type="file" class="btn btn-primary mt-5">Odaberi</button>
-      </router-link>--> 
+      <h4> {{ choosepremium.imeVozPremium }} {{ choosepremium.modelPremium }}</h4> 
       </div>
   </div>
 </template>
@@ -22,12 +18,5 @@ export default {
       global: store
     }
   },
-  /*
-  methods: {
-    async refresh() {
-      let post = await Vozilo.classSedan(this.choose.ime);
-    },
-  }
-  */
 }
 </script>

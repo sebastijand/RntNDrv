@@ -1,17 +1,14 @@
 <template>
   <div>
-    <h1 style="padding: 20px; color: #2c3e50">Model</h1>
+    <h1 style="padding: 20px; color: #2c3e50">Modeli</h1>
+    <p><b>Odaberite vozilo klikom na sliku.</b></p>
     
     <div @click="gotoDetails(card)" v-bind:key="card.idVozPremium" v-for="card in Cards">
       <ChoosePremiumComponent :choosepremium="card" /> 
     </div>
     
-    <!--<div v-bind:key="card" v-for="card in Cards">
-      <ChooseKombiComponent :choosekombi="card" /> 
-    </div>-->
-
-    <div style="float: left; margin: 20px; width: 300px"> 
-      <img src="left arrow logo.png" alt="" style="width: 250px; height: 250px">
+    <div style="float: left; margin: 20px; width: 200px"> 
+      <img src="left arrow logo.png" alt="" style="width: 150px; height: 150px">
       <router-link to="/klasa" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Natrag</button>
       </router-link>
@@ -25,20 +22,12 @@ import { Vozilo } from '@/services';
 import store from "@/store.js";
 
 export default {
-  //props: ['sasija'],
   data() {
     return {
       store,
       Cards: []
     };
   },
-  /*methods: {
-    async fetchPosts(term){
-      term = term || store.vehicleName
-      this.Cards = await Vozilo.classSedan(term/*this.sasija);
-      //console.log(this.cards)
-    }
-  },*/
   async mounted() {
     this.Cards = await Vozilo.classPremium();
   },
@@ -56,15 +45,6 @@ export default {
 
 
 <style scoped>
-  /*.mercedeslogo{
-
- -khtml-opacity:.50; 
- -moz-opacity:.50; 
- -ms-filter:”alpha(opacity=50)”;
-  filter:alpha(opacity=50);
-  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
-  opacity:.50; 
-  }*/
   .klasa1 {
     float: left;
     margin: 45px;

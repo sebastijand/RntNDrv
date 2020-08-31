@@ -13,7 +13,6 @@ import jwt from "jsonwebtoken";
 export default {
     // UNOS PODATAKA U NAŠU MONGODB BAZU
     async registerUser(userData) { 
-    //async registerUser(username, password, oib, ime, prezime, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
         let db = await connect();
         let doc = {
             username: userData.username,
@@ -21,7 +20,7 @@ export default {
             // doda se 8 random znakova kada se sprema u bazu šifra ("posoli" se šifra)
             // na taj u mongodb bazi se ispisuju random znakovi, a ne prava šifra
             password: await bcrypt.hash(userData.password, 8),  
-            //oib: userData.oib,  // -> TREBA DODAT U DRUGIM DATOTEKAMA JER SE OIB NE UPISUJE U BAZU
+            //oib: userData.oib,  // 
             ime: userData.ime,
             prezime: userData.prezime,
             adresa: userData.adresa,
@@ -32,9 +31,7 @@ export default {
         };
         try {
             let result = await db.collection('users').insertOne(doc);
-            // if (result && result.ops) {
             if (result && result.insertedId) {
-                // return result.ops
                 return result.insertedId;
             }
         } catch (e) {
@@ -42,14 +39,10 @@ export default {
                 throw new Error('Korisnik već postoji')
             }
         }
-        //await db.collection('users').insertOne(doc);
-        //console.log("tu smo", userData)
     },
     async authenticateUser(username, password, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
-    //async authenticateUser(username, password) {  //--> korisnik sa frontenda se prijavljue putem "username" i "password" (ovi podaci dolaze sa frontenda)
         let db = await connect() // spajamo se na bazu
         let user = await db.collection('users').findOne({ username: username, adresa: adresa, grad: grad, osiguranje: osiguranje, vozacka_dozvola: vozacka_dozvola, kontakt_tel: kontakt_tel})
-        //let user = await db.collection('users').findOne({ username: username })  // provjerava se da li postoji dokument sa istim "username" u bazi
         
         // bcrypt uspoređuje upisanu lozinku na frontendu (password) i "posoljenu" lozinku na backendu za 8 random char (user.password)
         if (user && user.password && (await bcrypt.compare(password, user.password))) {
@@ -77,19 +70,14 @@ export default {
     
 
     //PROFILE
-    // https://www.youtube.com/watch?v=3yJkI2EKLvU
-    /*async changeProfileInfo(username, n_adresa, n_grad, n_osiguranje, n_vozacka_dozvola, n_kontakt_tel){
-    // async changeProfileInfo(username, s_adresa, n_adresa){
+    async changeProfileInfo(username, n_adresa, n_grad, n_osiguranje, n_vozacka_dozvola, n_kontakt_tel){
         let db = await connect();
         let user = await db.collection('users').findOne({ username: username });
         if (user && user.adresa && user.grad && user.osiguranje && user.vozacka_dozvola && user.kontakt_tel) {
-        // if (user && user.adresa && await s_adresa){
-        //if (user) {
-            let result = await db.collection('users').updateOne(
+            let result = await db.collection('users').updateMany( // <- VIDIT DA LI PUSTIT ILI STAVIT "updateOne"
                 { _id: user._id },
                 {
                     $set: {
-                        // DODAT INFORMACIJE KOJE ĆE KORISNIK AŽURIRAT
                         adresa: n_adresa, 
                         grad: n_grad, 
                         osiguranje: n_osiguranje, 
@@ -100,7 +88,7 @@ export default {
             );
             return result.modifiedCount == 1;
         }
-    },*/
+    },
     
 
     //PASSWORD
@@ -123,7 +111,6 @@ export default {
         }
     },
     
-
 
     verify(req, res, next) {  
         try {

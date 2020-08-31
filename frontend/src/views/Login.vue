@@ -1,6 +1,6 @@
 <template>
   <div class="login" style="padding: 20px">
-    <h1>Login</h1>
+    <h1>Verifikacija / Login</h1>
     <div class="container">
       <div class="row">
         <div class="col-sm"></div>
@@ -31,14 +31,10 @@
                 <label for="categoryField">Category</label>
                 <input v-model="category" type="text" class="form-control" id="categoryField" aria-describedby="categoryHelp" placeholder="Enter category">
               </div> 
-              
-              
               <div class="form-group">
                 <label for="telephoneField">Telephone</label>
                 <input v-model="telephone" type="text" class="form-control" id="telephoneField" aria-describedby="telephoneHelp" placeholder="Enter telephone">
               </div> 
-              
-              
               <button type="submit" class="btn btn-primary">Submit</button>
               <router-link to="/signup">
                 <p>Nemate račun? Registrirajte se!</p>

@@ -8,19 +8,15 @@
                 <input v-model="rentStart" size="50" type="date" class="form-control" id="exampleInputStart" aria-describedby="emailHelp">
             </div>
         </div>
-
         <div class="form-group">
             <label for="exampleText">Lokacija prihvaćanja vozila:</label>
             <input v-model="location" type="text" class="form-control" id="exampleText" placeholder="Lokacija">
         </div>
-
         <div class="form-group">
             <label for="exampleInputPassword1">Završetak korištenja:</label>
             <input v-model="rentEnd" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <!-- <router-link to="/plaćanje" sytle="float: left">  -->
-            <button type="submit" class="btn btn-primary">Prihvati</button>  
-        <!-- </router-link> -->
+        <button type="submit" class="btn btn-primary">Prihvati</button>  
         <br>
         <br>
         <router-link to="/klasa">

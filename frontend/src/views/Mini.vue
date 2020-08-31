@@ -1,59 +1,18 @@
 <template>
   <div>
-    <h1 style="padding: 20px; color: #2c3e50">Model</h1>
+    <h1 style="padding: 20px; color: #2c3e50">Modeli</h1>
+    <p><b>Odaberite vozilo klikom na sliku.</b></p>
     <div @click="gotoDetails(card)" v-bind:key="card.idVozMini" v-for="card in Cards">
       <ChooseMiniComponent :choosemini="card" /> 
     </div>
 
-    <!-- 
-      <div v-bind:key="card" v-for="card in cards">
-        <InstagramCard :info="card" />
-      </div>
-    -->
-
-    <div style="float: left; margin: 20px; width: 300px"> 
-      <img src="left arrow logo.png" alt="" style="width: 250px; height: 250px">
+    <div style="float: left; margin: 20px; width: 200px"> 
+      <img src="left arrow logo.png" alt="" style="width: 150px; height: 150px">
       <router-link to="/klasa" sytle="float: left">
         <button type="file" class="btn btn-primary mt-5">Natrag</button>
       </router-link>
     </div>
   </div>
-  <!--
-    <div class="model">
-    <h1 style="padding: 20px; color: #2c3e50">Model</h1>
-
-    <div style="float: left; margin: 20px; width: 300px">
-      <img class="mercedeslogo" src="vwlogo.png" style="width: 200px; height: 200px;"> 
-      <h1>VW Up</h1>
-      <router-link to="/informacijevozilo" sytle="float: left">
-        <button type="file" class="btn btn-primary mt-5">Odaberi</button>
-      </router-link> 
-    </div>
-
-    <div style="float: left; margin: 20px; width: 300px">
-      <img src="škoda logo.png" style="width: 200px;  height: 200px;">
-      <h1>Škoda Citigo</h1> 
-      <router-link to="/informacijevozilo" sytle="float: left">
-        <button type="file" class="btn btn-primary mt-5">Odaberi</button>
-      </router-link>
-    </div>
-    
-    <div style="float: left; margin: 20px; width: 300px">
-      <img src="toyotalogo.png" style="width: 200px; height: 200px">
-      <h1>Toyota Aygo</h1> 
-      <router-link to="/informacijevozilo" sytle="float: left">
-        <button type="file" class="btn btn-primary mt-5">Odaberi</button>
-      </router-link>
-    </div>
-
-    <div style="float: left; margin: 20px; width: 300px"> 
-      <img src="left arrow logo.png" alt="" style="width: 250px; height: 250px">
-      <router-link to="/klasa" sytle="float: left">
-        <button type="file" class="btn btn-primary mt-5">Natrag</button>
-      </router-link>
-    </div>
-  </div>
-  -->
 </template>
 
 <script>
@@ -62,20 +21,12 @@ import { Vozilo } from '@/services';
 import store from "@/store.js";
 
 export default {
-  //props: ['sasija'],
   data() {
     return {
       store,
       Cards: []
     };
   },
-  /*methods: {
-    async fetchPosts(term){
-      term = term || store.vehicleName
-      this.Cards = await Vozilo.classSedan(term/*this.sasija);
-      //console.log(this.cards)
-    }
-  },*/
   async mounted() {
     this.Cards = await Vozilo.classMini();
   },
@@ -92,15 +43,6 @@ export default {
 </script>
 
 <style scoped>
-  /*.mercedeslogo{
-
- -khtml-opacity:.50; 
- -moz-opacity:.50; 
- -ms-filter:”alpha(opacity=50)”;
-  filter:alpha(opacity=50);
-  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
-  opacity:.50; 
-  }*/
   .klasa1 {
     float: left;
     margin: 45px;

@@ -1,6 +1,7 @@
 <template>
   <div class="plaćanjekred">
     <h1 style="padding: 20px; color: #2c3e50">Plaćanje kreditnom karticom:</h1>
+    <p><b>Molimo vas da ponovno upišete iste podatke</b></p>
     <form @submit.prevent="spremiBazaKred" class="form-group col-md-4" style="display: inline-block;">
       <div class="form-group">
         <label for="exampleInputNumber">Broj karitce:</label>
@@ -48,7 +49,7 @@
         
       <div>
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
-        <router-link to="/plaćanje">
+        <router-link to="/plaćanjekred">
           <button type="file" class="btn btn-primary">Natrag</button>
         </router-link>
       </div>
@@ -69,11 +70,11 @@ export default {
   },
   methods: {
     async spremiBazaKred() { 
-      let success3 = await Placanje.spremiBazaKred(this.cardNumber, this.date, this.companyName);
+      let success3 = await Placanje.confirmCredit(this.cardNumber, this.date, this.companyName);
       console.log('Rezultat prijave ', success3);
 
       if (success3 == true){
-        this.$router.push({ name: 'Plaćanje kreditna confirm' });  
+        this.$router.push({ name: 'Finalna potvrda' });  
       }  
     },
   },

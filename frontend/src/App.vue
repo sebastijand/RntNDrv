@@ -4,21 +4,19 @@
       <router-link to="/" style="float: left">Home</router-link>
       
       <router-link v-if="auth.authenticated" style="float: left" to="/login">
-        Login
+        <a @click="logout" href="#">Logout</a>
       </router-link>
       
-      
+      <router-link v-if="!auth.authenticated" to="/login" style="float: left">
+        Login
+      </router-link>
+            
       <!--
-      <router-link v-if="auth.authenticated" to="/login" style="float: left">
-        Logout
-      </router-link>-->
-      
-      <!-- OVO TESTIRAT KADA SE UKLJUČI BACKEND -->
-      
       <span v-if="!auth.authenticated" style="float: left">
-        <a @click="logout" href="#">Logout</a>
+        <a @click="logout" href="#">Login</a>
       </span>
-      
+      -->
+
       <!--
       <span v-if="auth.authenticated" style="float: left">
         <a @click="logout" href="#">Login</a>

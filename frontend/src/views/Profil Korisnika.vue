@@ -1,20 +1,20 @@
 <template>
 
-  <div class="card text-center w-20" style="width: 30.5em; margin:0 auto;">
+  <div class="card text-center w-20" style="width: 30.5em; margin:10px auto;">
     <div class="card-header ">
       <b>Informacije o korisniku:</b>
     </div>
     <div style="float: left; margin: 35px;">
       <span v-if="auth.authenticated">
-        <p><b>Ime:</b>  {{ auth.displayName }} </p>
-        <p><b>Prezime:</b>  {{ auth.displaySurname }} </p>
         <p><b>Adresa:</b>  {{ auth.displayAdress }} </p>
         <p><b>Grad:</b>  {{ auth.displayCity }} </p>
         <p><b>Osiguranje:</b>   {{ auth.userInsurance }} </p>
         <p><b>Vozačka dozvola:</b>  {{ auth.userCategory }} </p>
         <p><b>Kontakt telefon:</b>  {{ auth.displayTel }} </p>
         <p><b>Kontakt e-mail:</b>  {{ auth.userEmail }} </p>
-        <router-link to="/promjena">Promjeni lozinku</router-link>
+        <router-link to="/promjena">
+          <button type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Promjeni lozinku</button>
+        </router-link>
       </span>
       <router-link to="/status">
         <button type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Status najma</button>
@@ -25,30 +25,6 @@
       </router-link>
     </div>
   </div>
-  <!--
-  <div class="profilkorisnika">
-    <h4 style="float: left; margin: 50px">Informacije o korisniku:</h4>
-    <div style="float: left; margin: 125px;">
-      <span v-if="auth.authenticated">
-        <p><b>Ime:  {{ auth.displayName }} </b></p>
-        <p><b>Prezime:  {{ auth.displaySurname }} </b></p>
-        <p><b>Adresa:  {{ auth.displayAdress }} </b></p>
-        <p><b>Grad:  {{ auth.displayCity }} </b></p>
-        <p><b>Osiguranje:   {{ auth.userInsurance }} </b></p>
-        <p><b>Vozačka dozvola:  {{ auth.userCategory }} </b></p>
-        <p><b>Kontakt telefon:  {{ auth.displayTel }} </b></p>
-        <p><b>Kontakt e-mail:  {{ auth.userEmail }} </b></p>
-      </span>
-      <router-link to="/status">
-        <button type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Status najma</button>
-      </router-link>
-        
-      <router-link to="/uređivanjeprofila" style="margin-right: 15px">
-        <button type="file" class="btn btn-primary mt-5">Uredi</button>
-      </router-link>
-    </div>
-  </div>
-  -->
 </template>
 
 

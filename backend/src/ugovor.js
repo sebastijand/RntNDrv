@@ -1,6 +1,4 @@
-import connect from './db';
-//import bcrypt from "bcrypt";  
-//import jwt from "jsonwebtoken";     
+import connect from './db';  
 
 
 export default {

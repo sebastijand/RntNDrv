@@ -19,16 +19,12 @@
             <label for="exampleInputPassword1">Završetak korištenja:</label>
             <input v-model="rentEnd" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <!-- <router-link to="/plaćanje" sytle="float: left">  -->
-            <button type="submit" class="btn btn-primary">Prihvati</button>  
-        <!-- </router-link> -->
+        <button type="submit" class="btn btn-primary">Prihvati</button> <!-- -->
+        <router-link to="/odabirtermina">
+          <button type="file" class="btn btn-primary">Natrag</button>
+        </router-link> 
         <br>
         <br>
-        <!--
-        <router-link to="/klasa">
-            <p>Prije odabira termina, potrebno je odabrati vozilo</p>
-        </router-link>
-        -->
     </form>
   </div>
 </template>

@@ -51,12 +51,6 @@
               <label for="telephoneField">Telephone</label>
               <input v-model="telephone" type="text" class="form-control" id="telephoneField" aria-describedby="telephoneHelp" placeholder="Enter telephone">
             </div> 
-            <!--
-            <div class="form-group">
-              <label for="confirmPasswordField">Confirm Password</label>
-              <input v-model="passwordConfirmation" type="password" class="form-control" id="confirmPasswordField" placeholder="Confirm password">
-            </div>
-            -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -65,7 +59,6 @@
     </div>
   </div>
 </template> 
-
 
 
 <script>
@@ -84,8 +77,6 @@ export default {
       insurance: "",
       category: "",
       telephone: "",
-      //passwordConfirmation: "" ,
-      
     }
   },
   methods: {
@@ -93,8 +84,7 @@ export default {
       let success = await Auth.signup(this.email, this.password, this.name, this.surname, this.adress, this.city, this.insurance, this.category, this.telephone);
       console.log('Rezultat prijave ', success);
     
-      if (success == true){
-        //this.$router.push({ name: 'Izbornik' });  
+      if (success == true){ 
         this.$router.push({ name: 'Login' });  
       }  
     },

@@ -1,6 +1,7 @@
 <template>
   <div class="plaćanjegot">
-    <h1 style="padding: 20px; color: #2c3e50">Plaćanje gotovinom:</h1>
+    <h1 style="padding: 20px; color: #2c3e50">Verificiranje:</h1>
+    <p><b>Molimo vas da ponovno upišete iste podatke</b></p>
     <form @submit.prevent="confirmCash" class="form-group col-md-4" style="display: inline-block;">
 
       <div class="form-group">
@@ -32,21 +33,17 @@
 
       <p><strong>Plaćanje se odvija u poslovnici na dan početka najma</strong></p>
       <div>
-        <!--
-        <router-link to="/plaćanje" style="margin-right: 15px"> 
-          <button type="submit" class="btn btn-primary">Natrag</button> 
-        </router-link>
-        -->
-        <!-- <router-link to="/finalnapotvrda" style="margin-right: 15px"> -->
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
-        <!-- </router-link> -->
+        <router-link to="/plaćanjegot">
+          <button type="file" class="btn btn-primary">Natrag</button>
+        </router-link>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { Placanje } from '@/services';
+import { Placanje_Novac } from '@/services';
 
 export default {
   data() {
@@ -58,7 +55,7 @@ export default {
   },
   methods: {
     async confirmCash() { 
-      let success4 = await Placanje.confirmCash(this.storePayment/*, this.date, this.companyName*/);
+      let success4 = await Placanje_Novac.confirmCash(this.storePayment/*, this.date, this.companyName*/);
       console.log('Rezultat prihvata plaćanja ', success4);
 
       if (success4 == true){ 
