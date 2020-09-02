@@ -1,6 +1,4 @@
 <template>
-
-  
   <div class="card text-center w-20" style="width: 30.5em; margin:10px auto;">
     <div class="card-header ">
       <strong>FINALNA POTVRDA:</strong>
@@ -29,8 +27,9 @@
       <p>Lokacija: {{ trajanje.carSomething }}</p>
       <br>
       <h6><b>Plaćanje:</b></h6>
-      <p>Način Plaćanja:  <!-- {{ idkkkkkkkkkkkkkkkkkkkkkkkkkkkpaymentType }} --></p>
-      <p>Ime kompanije (kred): {{ payment.creditCardName }} </p>
+      <!-- <p>Način Plaćanja:  {{ idkkkkkkkkkkkkkkkkkkkkkkkkkkkpaymentType }} </p>-->
+      <p>Datum isteka (kred): {{ paymentCred.creditCardExp }} </p>
+      <p>Ime kompanije (kred): {{ paymentCred.creditCardName }} </p>
       <p>Mjesto poslovnice (gotovina): {{ paymentNovac.paymentCashStore }} </p>
       <router-link to="/izbornik">
         <button @click="removeEverything" type="file" class="btn btn-primary mt-5" style="margin-right: 15px">Odustani</button>
@@ -44,7 +43,7 @@
 
 <script type="text/javascript">
 import store from '@/store.js'
-import { Auth, Trajanje_Najama, Vozilo, Placanje, Ugovor, Placanje_Novac} from '@/services';
+import { Auth, Trajanje_Najama, Vozilo, Placanje, Ugovor, Placanje_Novac } from '@/services';
 
 export default {
   data () {
@@ -53,7 +52,7 @@ export default {
       auth: Auth.state,
       trajanje: Trajanje_Najama.state2,
       vehicle: Vozilo.stateVozilo,
-      payment: Placanje.statePlaćanje,
+      paymentCred: Placanje.statePlaćanje,
       paymentNovac: Placanje_Novac.statePlaćanjeNovac
     }
   },

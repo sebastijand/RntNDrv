@@ -1,10 +1,10 @@
 <template>
   <div>
-    <form @submit.prevent="choosenVozilo">
+    <!-- <form @submit.prevent="choosenVozilo"> -->
       <div v-if="card">
         <InfoVehiclesComponent :info="card" />
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
     console.log(this.sasija)
     this.card = await Vozilo.choosenVehicle(this.sasija);
   },
+  /*
   methods: {
     async choosenVozilo() { 
       let success = await Ugovor.choosenVozilo(this.imeVozila, this.modelVozila, this.klasaVozila);
@@ -37,6 +38,7 @@ export default {
       }  
     },
   },
+  */
   name: 'informacije-vozila',
   components: {
     InfoVehiclesComponent

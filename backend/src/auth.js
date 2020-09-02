@@ -20,7 +20,7 @@ export default {
             // doda se 8 random znakova kada se sprema u bazu šifra ("posoli" se šifra)
             // na taj u mongodb bazi se ispisuju random znakovi, a ne prava šifra
             password: await bcrypt.hash(userData.password, 8),  
-            //oib: userData.oib,  // 
+            oib: userData.oib,   
             ime: userData.ime,
             prezime: userData.prezime,
             adresa: userData.adresa,

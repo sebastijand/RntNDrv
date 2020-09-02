@@ -26,7 +26,7 @@ Service.interceptors.response.use((response) => response, (error) => {
 
 let Placanje_Novac = {
     async spremiBazaGot(mjesto_poslovnice){    
-        let response = await Service.post('/paymentsnovac', { 
+        let response = await Service.post('/paymentcash', { 
             mjesto_poslovnice: mjesto_poslovnice
         });
         let payment = response.data;  
@@ -34,7 +34,7 @@ let Placanje_Novac = {
         return true;
     },
     async confirmCash(mjesto_poslovnice){    
-        let response = await Service.post('/paymentscash', { 
+        let response = await Service.post('/paymentcashconfirm', { 
             mjesto_poslovnice: mjesto_poslovnice,
         });
         let cash = response.data;  
@@ -57,7 +57,7 @@ let Placanje_Novac = {
 // DIO VEZAN ZA PLAĆANJE
 let Placanje = {
     async spremiBazaKred(br_kartice, datum_isteka, ime_kompanije){    
-        let response = await Service.post('/paymentskreditna', { 
+        let response = await Service.post('/paymentcredit', { 
             br_kartice: br_kartice,
             datum_isteka: datum_isteka,
             ime_kompanije: ime_kompanije,
@@ -66,11 +66,11 @@ let Placanje = {
         localStorage.setItem('paymentCred', JSON.stringify(placanje)); 
         return true;
     },
-    async confirmCredit(br_kartice, datum_isteka, ime_kompanije){    
-        let response = await Service.post('/paymentcredit', { 
-            br_kartice: br_kartice,
+    async confirmCredit(/*br_kartice, */datum_isteka, ime_kompanije){    
+        let response = await Service.post('/paymentcreditconfirm', { 
+            //br_kartice: br_kartice,
             datum_isteka: datum_isteka,
-            ime_kompanije: ime_kompanije,
+            ime_kompanije: ime_kompanije
         });
         let credit = response.data;  
         localStorage.setItem('paymentCred2', JSON.stringify(credit)); 
@@ -92,26 +92,36 @@ let Placanje = {
                 return placanje.ime_kompanije;
             }
         },
+        get creditCardExp() {
+            let placanje = Placanje.getCred();
+            if (placanje) {
+                return placanje.datum_isteka;
+            }
+        },
     },
 }
 
 // DIO VEZAN ZA TRAJANJE NAJMA
 let Trajanje_Najama = {
-    async accetpDuration(pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja){    
+    async accetpDuration(pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja, kontakt_tel, odabrano_vozilo){    
         let response = await Service.post('/durations', { 
             pocetak_iznajmljivanja: pocetak_iznajmljivanja,
             lokacija_prihvata: lokacija_prihvata,
-            kraj_iznajmljivanja: kraj_iznajmljivanja
+            kraj_iznajmljivanja: kraj_iznajmljivanja,
+            kontakt_tel: kontakt_tel, 
+            odabrano_vozilo: odabrano_vozilo
         });
         let najam = response.data;  
         localStorage.setItem('rentDuration', JSON.stringify(najam)); 
         return true;
     },
-    async testDuration(pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja){    
+    async testDuration(pocetak_iznajmljivanja, lokacija_prihvata, kraj_iznajmljivanja, /*kontakt_tel, odabrano_vozilo*/){    
         let response = await Service.post('/duration', { 
             pocetak_iznajmljivanja: pocetak_iznajmljivanja,
             lokacija_prihvata: lokacija_prihvata,
-            kraj_iznajmljivanja: kraj_iznajmljivanja
+            kraj_iznajmljivanja: kraj_iznajmljivanja, 
+            /*kontakt_tel: kontakt_tel, 
+            odabrano_vozilo: odabrano_vozilo*/
         });
         let najam2 = response.data;  
         localStorage.setItem('rentDuration2', JSON.stringify(najam2)); 
@@ -305,7 +315,19 @@ let Ugovor = {
         localStorage.removeItem('paymentCash2');
         localStorage.removeItem('paymentCred2');
         localStorage.removeItem('rentDuration2');
-    }
+    },
+    removeVozilo(){
+        localStorage.removeItem('izabranoVozilo');
+    },
+    removeCash(){
+        localStorage.removeItem('paymentCash2');
+    },
+    removeCred(){
+        localStorage.removeItem('paymentCred2');
+    },
+    removeDuration(){
+        localStorage.removeItem('rentDuration2');
+    },
 }
 
 
@@ -324,11 +346,11 @@ let Auth = {
         localStorage.setItem('user', JSON.stringify(user)); 
         return true;
     },
-    async signup(username, password, ime, prezime, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
+    async signup(username, password, ime, prezime, oib, adresa, grad, osiguranje, vozacka_dozvola, kontakt_tel) {
         let response = await Service.post('/users', {
             username: username,
             password: password,
-            //oib: oib, --> DODAT GORE U ZAGRADE
+            oib: oib, 
             ime: ime,
             prezime: prezime,
             adresa: adresa,
@@ -341,8 +363,6 @@ let Auth = {
         localStorage.setItem('user', JSON.stringify(user)); 
         return true;
     },
-    
-    ///
 
     async update(username, n_adresa, n_grad, n_osiguranje, n_vozacka_dozvola, n_kontakt_tel){
         let response = await Service.patch('/users', {
@@ -366,10 +386,6 @@ let Auth = {
         let update_profile = response.data;  // axios preko "data" izlvači podatke sa backenda
         localStorage.setItem('user', JSON.stringify(update_profile)); // JSON.stringify pretvara objekt u string
     },
-
-
-    ///
-
 
     logout() {   // briše token iz local storage-a
         localStorage.removeItem('user');

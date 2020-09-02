@@ -59,6 +59,7 @@ export default {
       console.log('Rezultat prijave ', success);
 
       if (success == true){ 
+        //this.$router.push({ name: 'Login' });  
         this.$router.push({ name: 'Profil Korisnika' });  
       }  
     },

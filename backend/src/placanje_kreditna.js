@@ -1,15 +1,14 @@
 import mongo from 'mongodb';
 import connect from './db';
-//import bcrypt from "bcrypt";  
+import bcrypt from "bcrypt";  
 //import jwt from "jsonwebtoken";     
 
 
 export default {    
     async registerCredit(userPaymentCredit) {  
         let db = await connect();
-        let doc = {
-            // KREDITNA 
-            //br_kartice: await bcrypt.hash(userPayment.br_kartice, 10), // userPayment.br_kartice,
+        let doc = { 
+            br_kartice: await bcrypt.hash(userPaymentCredit.br_kartice, 10), // userPayment.br_kartice,
             datum_isteka: userPaymentCredit.datum_isteka,
             ime_kompanije: userPaymentCredit.ime_kompanije,
         };
@@ -32,7 +31,7 @@ export default {
             return {
                 // TOKEN KREDITNE KARTICE
                 datum_isteka: user.datum_isteka,
-                ime_kompanije: user.lokacija_prihvata,
+                ime_kompanije: user.ime_kompanije,
             }
         }
         else {

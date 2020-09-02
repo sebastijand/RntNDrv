@@ -21,6 +21,6 @@
   border-color: rgb(30,57,89);
   border-color: linear-gradient(50deg, rgba(30,57,89,1) 0%, rgba(6,204,244,1) 100%);
   */
-  border-width: thin 2px 2px thin;
+  border-width: thin 3px 3px thin;
 }
 </style>

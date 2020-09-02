@@ -19,9 +19,20 @@
             <label for="exampleInputPassword1">Završetak korištenja:</label>
             <input v-model="rentEnd" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
+
+        <!-- 
+        <div class="form-group">
+            <label for="exampleInputNumber">Unesite broj telefona:</label>
+            <input v-model="..." type="text" class="form-control" id="exampleInputNumber" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputVehicle">Unesite marku i model vozila koje ste odabrali:</label>
+            <input v-model="..." type="text" class="form-control" id="exampleInputVehicle" placeholder="Vehicle">
+        </div>
+        -->
         <button type="submit" class="btn btn-primary">Prihvati</button> <!-- -->
         <router-link to="/odabirtermina">
-          <button type="file" class="btn btn-primary">Natrag</button>
+          <button @click="removeDuration" type="file" class="btn btn-primary">Natrag</button>
         </router-link> 
         <br>
         <br>
@@ -31,7 +42,7 @@
 
 
 <script>
-import { Trajanje_Najama } from '@/services';
+import { Trajanje_Najama, Ugovor } from '@/services';
 
 export default {
     data() {
@@ -50,6 +61,9 @@ export default {
                 this.$router.push({ name: 'Plaćanje' });  
             }
         },  
+        removeDuration() {
+            Ugovor.removeDuration();
+        }
     },
 }
  

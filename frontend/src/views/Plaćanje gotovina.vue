@@ -4,8 +4,13 @@
     <form @submit.prevent="spremiBazaGot" class="form-group col-md-4" style="display: inline-block;">
 
       <div class="form-group">
-        <label for="exampleInputName">Mjesto Poslovnice:</label>
-        <input v-model="storePayment" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Ime">
+        <!-- <label for="exampleInputName">Adrese naših poslovnica:</label> -->
+        <h3>Adrese naših poslovnica:</h3>
+        <p>Zumbulićeva 5b, Poreč</p>
+        <p>Marsovo polje 20, Pula</p>
+        <p>Trg Slobode, Pazin</p>
+        <p>Gundulićeva 20, Rovinj</p>
+        <input v-model="storePayment" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Upišite adresu poslovnice u kojoj želite platit">
       </div>
         
       <!-- 
@@ -30,7 +35,7 @@
       </div> 
       -->
 
-      <p><strong>Plaćanje se odvija u poslovnici na dan početka najma</strong></p>
+      <p><strong>Plaćanje se odvija u poslovnici zadnjeg dana najma</strong></p>
       <div>
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
         <router-link to="/plaćanje">

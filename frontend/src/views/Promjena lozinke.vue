@@ -48,6 +48,7 @@ export default {
       console.log('Rezultat upisa ', success);
 
       if (success == true){ 
+        //this.$router.push({ name: 'Login' }); 
         this.$router.push({ name: 'Profil Korisnika' });  
       }  
     },

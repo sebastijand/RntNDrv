@@ -13,10 +13,10 @@
     <div class="info" style="float: left; margin: 10px">
       <h2>Cijena: {{ vehicle.carPrice }}</h2>
       <h2>Početak najma: {{ trajanje.dateFrom }}</h2>
-      <h2> Način plaćanja: {{ payment.creditCardName }} </h2> <!-- VIDIT SA ŽAKON -->
+      <!-- <h2> Način plaćanja: {{ payment.creditCardName }} </h2> VIDIT SA ŽAKON -->
 
 
-      <!-- <h2>Lokacija prihvaćanja vozila: {{ }}</h2> -->
+      <h2>Lokacija prihvaćanja vozila: {{ trajanje.carSomething }}</h2>
       <h2>Završetak najma: {{ trajanje.dateTo }}</h2>
       <!-- <h2>Datum stvaranja ugovora: {{ datumStvaranja }} </h2> -->  
     </div>

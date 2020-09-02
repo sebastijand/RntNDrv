@@ -2,11 +2,11 @@
   <div class="plaćanjekred">
     <h1 style="padding: 20px; color: #2c3e50">Plaćanje kreditnom karticom:</h1>
     <p><b>Molimo vas da ponovno upišete iste podatke</b></p>
-    <form @submit.prevent="spremiBazaKred" class="form-group col-md-4" style="display: inline-block;">
-      <div class="form-group">
+    <form @submit.prevent="confirmCredit" class="form-group col-md-4" style="display: inline-block;">
+      <!--<div class="form-group">
         <label for="exampleInputNumber">Broj karitce:</label>
         <input v-model="cardNumber" type="text" class="form-control" id="exampleInputNumber" aria-describedby="cardHelp" placeholder="Enter card number">
-      </div>
+      </div> -->
 
       <!--
       <div class="form-group">
@@ -50,7 +50,7 @@
       <div>
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
         <router-link to="/plaćanjekred">
-          <button type="file" class="btn btn-primary">Natrag</button>
+          <button @click="removeCred" type="file" class="btn btn-primary">Natrag</button>
         </router-link>
       </div>
     </form>
@@ -58,24 +58,26 @@
 </template>
 
 <script>
-import { Placanje } from '@/services';
+import { Placanje, Ugovor } from '@/services';
 
 export default {
   data() {
     return {
-      cardNumber: '',
       date: '',
       companyName: '',
     };
   },
   methods: {
-    async spremiBazaKred() { 
-      let success3 = await Placanje.confirmCredit(this.cardNumber, this.date, this.companyName);
-      console.log('Rezultat prijave ', success3);
+    async confirmCredit() { 
+      let success8 = await Placanje.confirmCredit(this.date, this.companyName);
+      console.log('Rezultat prijave ', success8);
 
-      if (success3 == true){
+      if (success8 == true){
         this.$router.push({ name: 'Finalna potvrda' });  
       }  
+    },
+    removeCred(){
+      Ugovor.removeCred();
     },
   },
 };

@@ -15,6 +15,14 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Završetak korištenja:</label>
             <input v-model="rentEnd" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div> 
+        <div class="form-group">
+            <label for="exampleInputNumber">Unesite broj telefona:</label>
+            <input v-model="phoneNumber" type="text" class="form-control" id="exampleInputNumber" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputVehicle">Unesite marku i model vozila koje ste odabrali:</label>
+            <input v-model="choosenCar" type="text" class="form-control" id="exampleInputVehicle" placeholder="Vehicle">
         </div>
         <button type="submit" class="btn btn-primary">Prihvati</button>  
         <br>
@@ -35,11 +43,13 @@ export default {
             rentStart: '', 
             location: '',
             rentEnd: '', 
+            phoneNumber: '',
+            choosenCar: ''
         };
     },
     methods: {
         async accetpDuration() { 
-            let success2 = await Trajanje_Najama.accetpDuration(this.rentStart, this.location, this.rentEnd);
+            let success2 = await Trajanje_Najama.accetpDuration(this.rentStart, this.location, this.rentEnd, this.phoneNumber, this.choosenCar);
             console.log('Rezultat prijave perioda ', success2);
 
             if (success2 == true){ // ako se upis dogodio, redirekcija na stranicu

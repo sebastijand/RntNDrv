@@ -31,11 +31,11 @@
       </div> 
       -->
 
-      <p><strong>Plaćanje se odvija u poslovnici na dan početka najma</strong></p>
+      <p><strong>Plaćanje se odvija u poslovnici zadnjeg dana najma</strong></p>
       <div>
         <button type="submit" class="btn btn-primary">Prihvati</button>  <!-- OVDJE DOLAZI POP-UP PROZOR!!! -->
         <router-link to="/plaćanjegot">
-          <button type="file" class="btn btn-primary">Natrag</button>
+          <button @click="removeCash" type="file" class="btn btn-primary">Natrag</button>
         </router-link>
       </div>
     </form>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { Placanje_Novac } from '@/services';
+import { Placanje_Novac, Ugovor } from '@/services';
 
 export default {
   data() {
@@ -61,6 +61,9 @@ export default {
       if (success4 == true){ 
         this.$router.push({ name: 'Finalna potvrda' });  
       }  
+    },
+    removeCash(){
+      Ugovor.removeCash();
     },
   },
 };

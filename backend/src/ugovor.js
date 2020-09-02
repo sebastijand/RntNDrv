@@ -1,4 +1,4 @@
-import connect from './db';  
+/*import connect from './db';  
 
 
 export default {
@@ -10,12 +10,6 @@ export default {
       ime: vehicle.ime,
       model: vehicle.model,
       klasa: vehicle.klasa,
-      //godina_proizvodnje: vehicle.godina_proizvodnje,
-      //boja: vehicle.boja,
-      //snaga: vehicle.snaga,
-      //vrata: vehicle.vrata,
-      //cijena: vehicle.cijena,
-      //logo: vehicle.logo    
     };
     try {
       let result = await db.collection('contract').insertOne(doc);
@@ -28,4 +22,4 @@ export default {
       }
     }
   },
-};
+};*/

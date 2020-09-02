@@ -10,7 +10,7 @@ import auth from './auth';
 import placanje_kreditna from './placanje_kreditna';
 import placanje_gotovina from './placanje_gotovina'
 import datum_najma from './datum_najma';
-import ugovor from './ugovor';
+//import ugovor from './ugovor';
 
 const app = express(); // instanciranje aplikacije
 const port = 3200; // port na kojem će web server slušati
@@ -50,7 +50,8 @@ app.post('/users', async (req, res) => {
 app.patch('/users', [auth.verify], async (req, res) => {
     let changes = req.body;
     let username = req.jwt.username;
-    if (changes.n_adresa) {
+    if (changes.n_adresa && changes.n_grad && changes.n_osiguranje && changes.n_vozacka_dozvola && changes.n_kontakt_tel) {
+    //if (changes.n_adresa) {
         let result = await auth.changeProfileInfo(username, changes.n_adresa, changes.n_grad, changes.n_osiguranje, changes.n_vozacka_dozvola, changes.n_kontakt_tel);
         if (result) {
             res.status(201).send();
@@ -78,7 +79,7 @@ app.patch('/users', [auth.verify], async (req, res) => {
 });
 
 // UNOS PODATAKA -> KREDITNA KARTICA
-app.post('/paymentskreditna', async (req, res) => {
+app.post('/paymentcredit', async (req, res) => {
     let payment = req.body;
     let payment_id;
     try{
@@ -91,10 +92,10 @@ app.post('/paymentskreditna', async (req, res) => {
 });
 
 // VERIFIKACIJA PLAĆANJA KREDITNOM KARTICOM
-app.post('/paymentcredit', async (req, res) => {
+app.post('/paymentcreditconfirm', async (req, res) => {
     let cred = req.body; 
     try {
-        let result = await placanje_kreditna.confirmPayment(cred.br_kartice, cred.datum_isteka, cred.ime_kompanije);
+        let result = await placanje_kreditna.confirmPayment(/*cred.br_kartice, */cred.datum_isteka, cred.ime_kompanije);
         res.json(result);
     }
     catch (e) {
@@ -103,7 +104,7 @@ app.post('/paymentcredit', async (req, res) => {
 });
 
 // UNOS PODATAKA -> GOTOVINA
-app.post('/paymentsnovac', async (req, res) => {
+app.post('/paymentcash', async (req, res) => {
     let payment = req.body;
     let payment_id;
     try{
@@ -116,7 +117,7 @@ app.post('/paymentsnovac', async (req, res) => {
 });
 
 // VERIFIKACIJA PLAĆANJA GOTOVINOM
-app.post('/paymentscash', async (req, res) => {
+app.post('/paymentcashconfirm', async (req, res) => {
     let novac = req.body;
     try {
         let result = await placanje_gotovina.confirmPaymentCash(novac.mjesto_poslovnice);
@@ -144,7 +145,7 @@ app.post('/durations', async (req, res) => {
 app.post('/duration', async (req, res) => {
     let dur = req.body;
     try {
-        let result = await datum_najma.confirmDuration(dur.pocetak_iznajmljivanja, dur.lokacija_prihvata, dur.kraj_iznajmljivanja);
+        let result = await datum_najma.confirmDuration(dur.pocetak_iznajmljivanja, dur.lokacija_prihvata, dur.kraj_iznajmljivanja/*, dur.kontakt_tel, dur.odabrano_vozilo*/);
         res.json(result);
     }
     catch (e) {
@@ -233,7 +234,7 @@ app.get('/vozilo6', async (req, res) => {
     res.json(result)
 })
 
-
+/*
 app.post('/ugovor', async (req, res) => {
     let vhc = req.body;
     let vhc_id;
@@ -244,9 +245,9 @@ app.post('/ugovor', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
     res.json({ vhc_id: vhc_id })
-    /*res.statusCode = 201;
-    res.setHeader('Location', '/ugovori/1');
-    res.send();*/
+    //res.statusCode = 201;
+    //res.setHeader('Location', '/ugovori/1');
+    //res.send();
 });
 
 app.get('/ugovor', async (req, res) => {
@@ -256,6 +257,7 @@ app.get('/ugovor', async (req, res) => {
     console.log("Prikaz dodanog vozila u ugovor: ", result)
     res.json(result)
 })
+*/
 
 
 app.listen(port, () => console.log(`Slušam na portu ${port}!`));

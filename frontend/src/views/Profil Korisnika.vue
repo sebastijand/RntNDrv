@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card text-center w-20" style="width: 30.5em; margin:10px auto;">
+  <div class="card text-center w-20" style="width: 32.5em; margin:10px auto;">
     <div class="card-header ">
       <b>Informacije o korisniku:</b>
     </div>
@@ -21,7 +21,7 @@
       </router-link>
         
       <router-link to="/uređivanjeprofila" style="margin-right: 15px">
-        <button type="file" class="btn btn-primary mt-5">Uredi</button>
+        <button type="file" class="btn btn-primary mt-5">Uredi podatke</button>
       </router-link>
     </div>
   </div>

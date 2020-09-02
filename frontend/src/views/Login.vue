@@ -1,38 +1,39 @@
 <template>
   <div class="login" style="padding: 20px">
     <h1>Verifikacija / Login</h1>
+    <p><b>Zbog veće sigurnosti, potrebno je ponovno upisati iste podatke za verifikaciju.</b></p>
     <div class="container">
       <div class="row">
         <div class="col-sm"></div>
           <div class="col-sm">
             <form @submit.prevent="login">
               <div class="form-group">
-                <label for="exampleInputEmail1">Enter your email address</label>
+                <label for="exampleInputEmail1">Email adresa</label>
                 <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1">Lozinka</label>
                 <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               
               <div class="form-group">
-                <label for="adressField">Adress</label>
+                <label for="adressField">Adresa</label>
                 <input v-model="adress" type="text" class="form-control" id="adressField" aria-describedby="adressHelp" placeholder="Enter adress">
               </div>  
               <div class="form-group">
-                <label for="cityField">City</label>
+                <label for="cityField">Grad</label>
                 <input v-model="city" type="text" class="form-control" id="cityField" aria-describedby="cityHelp" placeholder="Enter city">
               </div> 
               <div class="form-group">
-                <label for="insuranceField">Insurance</label>
+                <label for="insuranceField">Osiguranje</label>
                 <input v-model="insurance" type="text" class="form-control" id="insuranceField" aria-describedby="insuranceHelp" placeholder="Enter insurance">
               </div> 
               <div class="form-group">
-                <label for="categoryField">Category</label>
+                <label for="categoryField">Položene kategorije vozačke dozvole</label>
                 <input v-model="category" type="text" class="form-control" id="categoryField" aria-describedby="categoryHelp" placeholder="Enter category">
               </div> 
               <div class="form-group">
-                <label for="telephoneField">Telephone</label>
+                <label for="telephoneField">Broj telefona</label>
                 <input v-model="telephone" type="text" class="form-control" id="telephoneField" aria-describedby="telephoneHelp" placeholder="Enter telephone">
               </div> 
               <button type="submit" class="btn btn-primary">Submit</button>
