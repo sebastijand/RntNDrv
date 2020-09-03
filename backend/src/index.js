@@ -13,7 +13,8 @@ import datum_najma from './datum_najma';
 //import ugovor from './ugovor';
 
 const app = express(); // instanciranje aplikacije
-const port = 3200; // port na kojem će web server slušati
+//const port = 3200; // port na kojem će web server slušati
+const port = process.env.PORT || 3200
 
 app.use(cors());
 app.use(express.json());
