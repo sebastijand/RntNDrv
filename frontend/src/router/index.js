@@ -105,8 +105,8 @@ Vue.use(VueRouter)
   },
   {
     path: '/plaćanjekred',
-    name: 'Plaćanje kreditna',
-    component: () => import('../views/Plaćanje kreditna.vue')
+    name: 'Plaćanje Kreditna',
+    component: () => import('../views/Plaćanje Kreditna.vue')
   },
   {
     path: '/plaćanjegot',
