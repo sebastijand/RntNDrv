@@ -4,7 +4,8 @@ import router from '../router';
 
 // instanca axios-a za potrebe Fipugram backenda
 let Service = axios.create({
-    baseURL: 'http://localhost:3200/',
+    //baseURL: 'http://localhost:3200/',
+    baseURL: 'https://git.heroku.com/rent-and-drive-backend.git',
     timeout: 1000,
 });
 
